@@ -13,8 +13,8 @@ __SlotLabels__ är en GridPanel som är en JPanel. En JPanel är en komponent so
 Gridpanel lägger in en GridLayout i en JPanel, och kan på så sätt också kallas en fasadklass till JPanel. 
 SlotLabels skapar alltså en JPanel med en GridLayout i som är fylld med en massa slotlabels, som utgör samtliga rutor i programmet.
 __Editor__ är klassen som är textrutan längst upp där man skriver in vad man vill lägga i de olika labelsarna.
-__StatusLabel__ håller reda på denna labels status i form av textinput, och skickar uppdateringar av detta till observer.
-__CurrentLabel__ Current label ansvarar för att uppdatera i programmet vilken label man är på. (visas i programrutan)
+__StatusLabel__ håller reda på uppdateringar i det översta fältet, där menyn är. 
+__CurrentLabel__ Current label ansvarar för att uppdatera i programmet, via observer, vilken label man är på.
 __XL__ är mainprogrammet där GUI-ns alla delar sätts ihop och programmet körs.
 
 A4: Användningsfall: Någon skriver in 42 i Editor – vad skall hända för att vi skall se värdet 42 i rutnätet 
