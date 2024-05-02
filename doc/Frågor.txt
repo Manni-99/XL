@@ -1,0 +1,4 @@
+Före redovisningstillfället ska ni lägga upp en fil på CourseGit med era svar på frågorna 
+A3, A4, B2, B4, C1, D1, D2, E4, E5 från listan av förberedande frågor som ni hittar längst ner på denna sida. 
+Ni ska dessutom lämna in ett utkast till klassdesign i form av ett klassdiagram för samtliga paket i er design. 
+Ni kan dock utelämna det givna paketet expr. Lägg era filer i en katalog med namnet doc på samma sätt som ni gjorde för projekt 1,
