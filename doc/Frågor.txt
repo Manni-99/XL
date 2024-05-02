@@ -7,6 +7,15 @@ Skicka in era svar och diagram senast klockan 10.00 dagen innan ert redovisnings
 
 Överblick
 A3: Förklara kortfattat vad var och en av klasserna SlotLabel, SlotLabels, Editor, StatusLabel, CurrentLabel och XL i den utdelade koden gör.
+__Slotlabel__ är en coloredLabel som är en Jlabel. coloredLabel är en fasadklass av Jlabel eftersom coloredLabel endast använder delar av Jlabel.
+en Slotlabel är en ruta i programmet som har en viss färg och innehåller text.
+__SlotLabels__ är en GridPanel som är en JPanel. En JPanel är en komponent som används för att organisera GUI-layout.
+Gridpanel lägger in en GridLayout i en JPanel, och kan på så sätt också kallas en fasadklass till JPanel. 
+SlotLabels skapar alltså en JPanel med en GridLayout i som är fylld med en massa slotlabels, som utgör samtliga rutor i programmet.
+__Editor__ är klassen som är textrutan längst upp där man skriver in vad man vill lägga i de olika labelsarna.
+__StatusLabel__ håller reda på denna labels status i form av textinput, och skickar uppdateringar av detta till observer.
+__CurrentLabel__ Current label ansvarar för att uppdatera i programmet vilken label man är på. (visas i programrutan)
+__XL__ är mainprogrammet där GUI-ns alla delar sätts ihop och programmet körs.
 
 A4: Användningsfall: Någon skriver in 42 i Editor – vad skall hända för att vi skall se värdet 42 i rutnätet 
 (dvs vilken väg skall värdet gå igenom M, V och C)?
