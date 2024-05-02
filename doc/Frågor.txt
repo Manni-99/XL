@@ -2,3 +2,30 @@ Före redovisningstillfället ska ni lägga upp en fil på CourseGit med era sva
 A3, A4, B2, B4, C1, D1, D2, E4, E5 från listan av förberedande frågor som ni hittar längst ner på denna sida. 
 Ni ska dessutom lämna in ett utkast till klassdesign i form av ett klassdiagram för samtliga paket i er design. 
 Ni kan dock utelämna det givna paketet expr. Lägg era filer i en katalog med namnet doc på samma sätt som ni gjorde för projekt 1,
+Skicka in era svar och diagram senast klockan 10.00 dagen innan ert redovisningstillfälle.
+
+
+Överblick
+A3: Förklara kortfattat vad var och en av klasserna SlotLabel, SlotLabels, Editor, StatusLabel, CurrentLabel och XL i den utdelade koden gör.
+
+A4: Användningsfall: Någon skriver in 42 i Editor – vad skall hända för att vi skall se värdet 42 i rutnätet 
+(dvs vilken väg skall värdet gå igenom M, V och C)?
+
+
+Modell
+B2: Hur modellerar vi att en ruta (cell) kan innehålla antingen en kommentar eller ett uttryck?
+
+B4: Vilka klasser behövs i modellen (utöver dem i expr-paketet)?
+
+Modell: Environment
+C1: När ett uttryck som innehåller en adress skall beräknas använder vi Environment – varför?
+
+Koppling mellan M och V/C
+D1: Vilka klasser i modellen behöver vårt GUI känna till?
+
+D2: När vårt GUI hämtar värden att skriva ut i SlotLabel eller SlotLabels, vilka värden, och vilken typ vill vi få tillbaka?
+
+Koppling mellan M och V/C: felhantering
+E4: Allmänt: i vilket paket upptäcker vi felen?
+
+E5: Allmänt: i vilket paket hanterar vi felen, och hur?
