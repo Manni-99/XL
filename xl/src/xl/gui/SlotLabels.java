@@ -22,7 +22,7 @@ public class SlotLabels extends GridPanel {
                 labelList.add(label);
             }
         }
-        SlotLabel firstLabel = labelList.get(0);
+        SlotLabel firstLabel = labelList.get(1);
         firstLabel.setBackground(Color.YELLOW);
     }
 }
