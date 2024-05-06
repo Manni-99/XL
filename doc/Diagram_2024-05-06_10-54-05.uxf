@@ -1,47 +1,85 @@
-<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><help_text></help_text><element><id>UMLClass</id><coordinates><x>60</x><y>140</y><w>100</w><h>50</h></coordinates><panel_attributes>Controller
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><help_text></help_text><element><id>UMLClass</id><coordinates><x>140</x><y>540</y><w>100</w><h>50</h></coordinates><panel_attributes>Controller
 --
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>180</x><y>140</y><w>100</w><h>50</h></coordinates><panel_attributes>XLMenuBar
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>940</x><y>500</y><w>100</w><h>50</h></coordinates><panel_attributes>XLMenuBar
 --
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>300</x><y>140</y><w>100</w><h>50</h></coordinates><panel_attributes>WindowsMenuItem
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>380</x><y>540</y><w>100</w><h>50</h></coordinates><panel_attributes>WindowsMenuItem
 --
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>630</x><y>140</y><w>100</w><h>50</h></coordinates><panel_attributes>OpenMenuItem
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>790</x><y>770</y><w>160</w><h>70</h></coordinates><panel_attributes>OpenMenuItem
 --
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>410</x><y>210</y><w>100</w><h>50</h></coordinates><panel_attributes>CloseMenuItem
+#statusLabel: StatusLabel
+#xl: XL</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>940</x><y>570</y><w>100</w><h>50</h></coordinates><panel_attributes>CloseMenuItem
 --
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>180</x><y>210</y><w>100</w><h>50</h></coordinates><panel_attributes>NewMenuItem
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1100</x><y>740</y><w>100</w><h>50</h></coordinates><panel_attributes>NewMenuItem
 --
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>300</x><y>210</y><w>100</w><h>50</h></coordinates><panel_attributes>LoadMenuItem
+-xl: XL</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>940</x><y>650</y><w>120</w><h>50</h></coordinates><panel_attributes>LoadMenuItem
 --
-action</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>520</x><y>210</y><w>100</w><h>50</h></coordinates><panel_attributes>ClearMenuItem
+action(String): void </panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>470</x><y>620</y><w>100</w><h>50</h></coordinates><panel_attributes>ClearMenuItem
 --
-action</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>630</x><y>210</y><w>100</w><h>50</h></coordinates><panel_attributes>ClearAllMenuItem
+action</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>260</x><y>790</y><w>110</w><h>50</h></coordinates><panel_attributes>ClearAllMenuItem
 --
-action</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>410</x><y>140</y><w>100</w><h>50</h></coordinates><panel_attributes>WindowsMenu
+action</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>490</x><y>540</y><w>100</w><h>50</h></coordinates><panel_attributes>WindowsMenu
 --
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>520</x><y>140</y><w>100</w><h>50</h></coordinates><panel_attributes>SaveMenuItem
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>570</x><y>780</y><w>100</w><h>50</h></coordinates><panel_attributes>SaveMenuItem
 --
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>60</x><y>350</y><w>100</w><h>30</h></coordinates><panel_attributes>Adjustment 
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>180</x><y>350</y><w>130</w><h>30</h></coordinates><panel_attributes>NumberAdjustment
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>320</x><y>350</y><w>130</w><h>50</h></coordinates><panel_attributes>XLBufferedReader
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1560</x><y>350</y><w>120</w><h>40</h></coordinates><panel_attributes>Adjustment 
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1540</x><y>270</y><w>130</w><h>40</h></coordinates><panel_attributes>NumberAdjustment
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>320</x><y>670</y><w>130</w><h>50</h></coordinates><panel_attributes>XLBufferedReader
 --
-move</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>460</x><y>350</y><w>130</w><h>30</h></coordinates><panel_attributes>XLException
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>600</x><y>350</y><w>130</w><h>40</h></coordinates><panel_attributes>XLPrintStream
+move</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1370</x><y>270</y><w>130</w><h>40</h></coordinates><panel_attributes>XLException
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>120</x><y>660</y><w>130</w><h>70</h></coordinates><panel_attributes>XLPrintStream
 --
 XXX
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>60</x><y>480</y><w>100</w><h>30</h></coordinates><panel_attributes>BorderPanel
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>180</x><y>480</y><w>100</w><h>30</h></coordinates><panel_attributes>ColoredLabel
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>300</x><y>480</y><w>100</w><h>30</h></coordinates><panel_attributes>CurrentLabel
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>420</x><y>480</y><w>100</w><h>30</h></coordinates><panel_attributes>Editor
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>60</x><y>540</y><w>100</w><h>30</h></coordinates><panel_attributes>GridPanel
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>180</x><y>540</y><w>100</w><h>30</h></coordinates><panel_attributes>RowLabel
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>290</x><y>540</y><w>100</w><h>30</h></coordinates><panel_attributes>SheetPanel
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>400</x><y>540</y><w>100</w><h>30</h></coordinates><panel_attributes>SlotLabel
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>510</x><y>540</y><w>100</w><h>30</h></coordinates><panel_attributes>SlotLabels
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>60</x><y>600</y><w>100</w><h>30</h></coordinates><panel_attributes>StatesLabel
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>180</x><y>600</y><w>100</w><h>30</h></coordinates><panel_attributes>StatusPanel
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>290</x><y>600</y><w>100</w><h>30</h></coordinates><panel_attributes>XL
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>400</x><y>600</y><w>100</w><h>30</h></coordinates><panel_attributes>XLCount
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>60</x><y>660</y><w>100</w><h>50</h></coordinates><panel_attributes>&lt;&lt;xxx&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>490</x><y>40</y><w>100</w><h>40</h></coordinates><panel_attributes>BorderPanel
+--
+.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>490</x><y>200</y><w>100</w><h>40</h></coordinates><panel_attributes>ColoredLabel
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>390</x><y>290</y><w>100</w><h>30</h></coordinates><panel_attributes>CurrentLabel
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>950</x><y>200</y><w>100</w><h>30</h></coordinates><panel_attributes>Editor
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>120</x><y>200</y><w>100</w><h>30</h></coordinates><panel_attributes>GridPanel
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>280</x><y>200</y><w>100</w><h>30</h></coordinates><panel_attributes>RowLabels
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>280</x><y>40</y><w>100</w><h>30</h></coordinates><panel_attributes>SheetPanel
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>650</x><y>200</y><w>100</w><h>40</h></coordinates><panel_attributes>SlotLabel
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>120</x><y>40</y><w>100</w><h>40</h></coordinates><panel_attributes>SlotLabels
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>590</x><y>280</y><w>100</w><h>40</h></coordinates><panel_attributes>StatusLabel
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>720</x><y>40</y><w>100</w><h>40</h></coordinates><panel_attributes>StatusPanel
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>900</x><y>30</y><w>160</w><h>150</h></coordinates><panel_attributes>XL
+--
+-ROWS: static final int
+-COLUMNS: static final int
+-counter: XLCount
+-statusLabel: StatusLabel
+-xlList: XLList
+--
+main(String[]): void 
+rename(String): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>950</x><y>290</y><w>100</w><h>60</h></coordinates><panel_attributes>XLCounter
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>950</x><y>360</y><w>100</w><h>50</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 Observer
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>170</x><y>660</y><w>100</w><h>30</h></coordinates><panel_attributes>XLList
---</panel_attributes><additional_attributes></additional_attributes></element></diagram>
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>950</x><y>240</y><w>100</w><h>40</h></coordinates><panel_attributes>XLList
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>110</x><y>0</y><w>1110</w><h>930</h></coordinates><panel_attributes>gui
+--
+bg=orange</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>110</x><y>410</y><w>1110</w><h>520</h></coordinates><panel_attributes>gui.menu
+--
+bg=blue</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>1360</x><y>240</y><w>330</w><h>170</h></coordinates><panel_attributes>util
+--
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>580</x><y>210</y><w>90</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;70;10</additional_attributes></element><element><id>Relation</id><coordinates><x>440</x><y>230</y><w>120</w><h>80</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>100;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>210</x><y>200</y><w>90</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;70;10</additional_attributes></element><element><id>Relation</id><coordinates><x>370</x><y>190</y><w>140</w><h>40</h></coordinates><panel_attributes>lt=&lt;-
+has many</panel_attributes><additional_attributes>120;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>320</x><y>60</y><w>30</w><h>160</h></coordinates><panel_attributes>lt=&lt;-
+</panel_attributes><additional_attributes>10;140;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>160</x><y>70</y><w>30</w><h>150</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;130;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>370</x><y>50</y><w>140</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>120;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>210</x><y>40</y><w>90</w><h>40</h></coordinates><panel_attributes>lt=&lt;-
+</panel_attributes><additional_attributes>70;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>180</x><y>70</y><w>380</w><h>150</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>360;130;360;50;10;50;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>200</x><y>70</y><w>520</w><h>150</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>500;130;500;30;10;30;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>530</x><y>230</y><w>130</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;110;50</additional_attributes></element><element><id>Relation</id><coordinates><x>630</x><y>310</y><w>340</w><h>110</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>320;90;10;90;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>580</x><y>50</y><w>160</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;140;10</additional_attributes></element><element><id>Relation</id><coordinates><x>440</x><y>70</y><w>400</w><h>300</h></coordinates><panel_attributes>lt=&lt;-
+</panel_attributes><additional_attributes>10;250;10;280;380;280;380;10</additional_attributes></element><element><id>Relation</id><coordinates><x>680</x><y>70</y><w>140</w><h>240</h></coordinates><panel_attributes>lt=&lt;-
+</panel_attributes><additional_attributes>10;220;120;220;120;10</additional_attributes></element><element><id>Relation</id><coordinates><x>680</x><y>40</y><w>240</w><h>290</h></coordinates><panel_attributes>lt=&lt;-
+</panel_attributes><additional_attributes>10;270;220;270;220;10</additional_attributes></element><element><id>Relation</id><coordinates><x>900</x><y>170</y><w>70</w><h>160</h></coordinates><panel_attributes>lt=&lt;-
+</panel_attributes><additional_attributes>50;140;10;140;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>910</x><y>170</y><w>60</w><h>110</h></coordinates><panel_attributes>lt=&lt;-
+</panel_attributes><additional_attributes>40;90;10;90;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>870</x><y>40</y><w>90</w><h>500</h></coordinates><panel_attributes>lt=&lt;-
+</panel_attributes><additional_attributes>70;480;10;480;10;10;30;10</additional_attributes></element><element><id>Relation</id><coordinates><x>810</x><y>30</y><w>110</w><h>40</h></coordinates><panel_attributes>lt=&lt;-
+</panel_attributes><additional_attributes>10;20;90;20</additional_attributes></element><element><id>Relation</id><coordinates><x>340</x><y>60</y><w>620</w><h>140</h></coordinates><panel_attributes>lt=&lt;-
+</panel_attributes><additional_attributes>10;10;10;120;600;120</additional_attributes></element><element><id>Relation</id><coordinates><x>970</x><y>170</y><w>30</w><h>50</h></coordinates><panel_attributes>lt=&lt;-
+</panel_attributes><additional_attributes>10;30;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>510</x><y>360</y><w>100</w><h>50</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+Observable
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>600</x><y>260</y><w>370</w><h>150</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;130;250;130;250;10;350;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1030</x><y>100</y><w>100</w><h>520</h></coordinates><panel_attributes>lt=&lt;-
+</panel_attributes><additional_attributes>30;10;80;10;80;500;10;500</additional_attributes></element><element><id>Relation</id><coordinates><x>1030</x><y>250</y><w>80</w><h>350</h></coordinates><panel_attributes>lt=&lt;-
+</panel_attributes><additional_attributes>20;10;60;10;60;330;10;330</additional_attributes></element><element><id>Relation</id><coordinates><x>940</x><y>690</y><w>70</w><h>130</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;110;50;110;50;10</additional_attributes></element><element><id>Relation</id><coordinates><x>650</x><y>310</y><w>230</w><h>480</h></coordinates><panel_attributes>lt=&lt;-
+</panel_attributes><additional_attributes>10;10;10;50;210;50;210;460</additional_attributes></element><element><id>Relation</id><coordinates><x>1050</x><y>60</y><w>120</w><h>700</h></coordinates><panel_attributes>lt=&lt;-
+</panel_attributes><additional_attributes>10;10;100;10;100;680</additional_attributes></element><element><id>Relation</id><coordinates><x>940</x><y>40</y><w>260</w><h>810</h></coordinates><panel_attributes>lt=&lt;-
+</panel_attributes><additional_attributes>120;10;240;10;240;660;150;660;150;790;10;790</additional_attributes></element><element><id>Relation</id><coordinates><x>850</x><y>650</y><w>30</w><h>130</h></coordinates><panel_attributes>lt=-
+</panel_attributes><additional_attributes>10;10;10;110</additional_attributes></element><element><id>Relation</id><coordinates><x>660</x><y>790</y><w>150</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>130;10;10;10</additional_attributes></element></diagram>
