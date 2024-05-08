@@ -1,4 +1,4 @@
-package xl.expr;
+package xl.model.expr;
 
 class Mul extends BinaryExpr {
 

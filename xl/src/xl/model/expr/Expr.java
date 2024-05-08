@@ -1,4 +1,4 @@
-package xl.expr;
+package xl.model.expr;
 
 /**
  * An <code>Expr</code> object represents a real valued expression that may contain variables. The
