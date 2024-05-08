@@ -10,11 +10,12 @@ public class Editor extends JTextField implements ActionListener{
 
     public Editor() {
         setBackground(Color.WHITE);
+        addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+        System.out.println(getText());
+        
     }
 }
