@@ -1,9 +1,13 @@
 package xl.gui;
 
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.SwingConstants;
+
+import org.w3c.dom.events.MouseEvent;
 
 public class SlotLabels extends GridPanel {
 
@@ -17,12 +21,14 @@ public class SlotLabels extends GridPanel {
         }
         for (int row = 1; row <= rows; row++) {
             for (char ch = 'A'; ch < 'A' + cols; ch++) {
-                SlotLabel label = new SlotLabel();
+                SlotLabel label = new SlotLabel(ch, row);
+                
                 add(label);
                 labelList.add(label);
             }
         }
         SlotLabel firstLabel = labelList.get(1);
         firstLabel.setBackground(Color.YELLOW);
+        
     }
 }
