@@ -3,23 +3,30 @@ package xl.gui;
 import java.awt.Color;
 import java.awt.event.*;
 
+import javax.swing.Action;
+
 
 public class SlotLabel extends ColoredLabel implements MouseListener{
-    public SlotLabel(char col, int row) {
+    MouseListenerXL a;
+    public SlotLabel(char col, int row, MouseListenerXL a) {
         super("                   ", Color.WHITE, RIGHT);
         setName(String.valueOf(col) + row);
-        addMouseListener(this);
-        
+        this.addMouseListener(this);
+        this.a = a;
     }
 
+    public void update(){
+       a.getCR().setText(getName());
+       a.setLastClicked(this);
+    }
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println("aarå");
+        update();
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-       
+        
     }
 
     @Override
@@ -29,14 +36,13 @@ public class SlotLabel extends ColoredLabel implements MouseListener{
 
     @Override
     public void mouseEntered(MouseEvent e) {
-   System.out.println("you've entered" + getName());
+        
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
         
     }
-
 
 
 }

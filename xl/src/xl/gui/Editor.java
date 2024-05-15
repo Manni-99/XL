@@ -17,5 +17,6 @@ public class Editor extends JTextField implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         System.out.println(getText());
         
+        
     }
 }

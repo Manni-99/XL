@@ -25,9 +25,11 @@ public class XL extends JFrame {
         this.counter = counter;
         xlList.add(this);
         counter.increment();
-        JPanel statusPanel = new StatusPanel(statusLabel);
-        JPanel sheetPanel = new SheetPanel(ROWS, COLUMNS);
+        MouseListenerXL ms = new MouseListenerXL();
+        JPanel statusPanel = new StatusPanel(statusLabel, ms);
+        JPanel sheetPanel = new SheetPanel(ROWS, COLUMNS, ms);
         Editor editor = new Editor();
+             
         add(NORTH, statusPanel);
         add(CENTER, editor);
         add(SOUTH, sheetPanel);
@@ -41,6 +43,10 @@ public class XL extends JFrame {
     public void rename(String title) {
         setTitle(title);
         xlList.setChanged();
+    }
+
+    public void update(){
+        
     }
 
     public static void main(String[] args) {

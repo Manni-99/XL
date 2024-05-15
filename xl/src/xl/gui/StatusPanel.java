@@ -8,8 +8,10 @@ import java.awt.event.ActionListener;
 
 public class StatusPanel extends BorderPanel{
 
-    protected StatusPanel(StatusLabel statusLabel) {
-        add(WEST, new CurrentLabel());
+    protected StatusPanel(StatusLabel statusLabel, MouseListenerXL ms) {
+        CurrentLabel c = new CurrentLabel();
+        ms.addA(c);
+        add(WEST, c);
         add(CENTER, statusLabel);
     }
 
