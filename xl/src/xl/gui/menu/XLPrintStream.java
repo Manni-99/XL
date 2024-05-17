@@ -1,9 +1,12 @@
-package xl.util;
+package xl.gui.menu;
 
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.Map.Entry;
 import java.util.Set;
+
+import xl.gui.SlotLabel;
+import xl.gui.XL;
 
 // TODO move to another package
 public class XLPrintStream extends PrintStream {
@@ -13,8 +16,8 @@ public class XLPrintStream extends PrintStream {
     }
 
     // TODO Change Object to something appropriate
-    public void save(Set<Entry<String, Object>> set) {
-        for (Entry<String, Object> entry : set) {
+    public void save(Set<Entry<String, SlotLabel>> set) {
+        for (Entry<String, SlotLabel> entry : set) {
             print(entry.getKey());
             print('=');
             println(entry.getValue());

@@ -33,5 +33,9 @@ public class SlotLabels extends GridPanel {
         }
         
     }
+
+    public List<SlotLabel> getLabels(){
+        return labelList;
+    }
    
 }
