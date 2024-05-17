@@ -2,6 +2,8 @@ package xl.model;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import xl.model.expr.Environment;
 import xl.model.expr.Expr;
@@ -23,6 +25,29 @@ public class BombCell implements Cell {
         this.dependentRef = new ArrayList<>(dependentRef); // Copy constructor for ArrayList
         this.parser = new ExprParser();
     }
+
+            public Object buildBombCell(Object content) {
+            String s = (String) content;
+            Pattern commentPattern = Pattern.compile("[!,#]");
+            Pattern exprPattern = Pattern.compile("[0-9]");
+            Pattern stringPattern = Pattern.compile("[a-z,A-Z]");
+            Matcher matcher;
+            boolean matches;
+
+            try{
+                if(commentPattern.matcher(s).matches()){
+                    return new CommentCell((String) content);
+                }
+                if(exprPattern.matcher(s).matches()) {
+                    return new ExpCell((Expr) content);
+                }
+            } catch (Exception e) {
+                throw new IllegalArgumentException("Unsupported content type: " + content.getClass());
+            }
+            return new CommentCell("#ERROR");
+    }
+
+    
     @Override
     public <E> String display(E e) {
         return ""; // Return an empty string for display
