@@ -7,6 +7,7 @@ import static java.awt.BorderLayout.SOUTH;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import xl.gui.menu.XLMenuBar;
+import xl.model.Sheet;
 
 public class XL extends JFrame {
 
@@ -14,6 +15,8 @@ public class XL extends JFrame {
     private XLCounter counter;
     private StatusLabel statusLabel = new StatusLabel();
     private XLList xlList;
+    private SheetPanel sp;
+    private UpdaterXL ms;
 
     public XL(XL oldXL) {
         this(oldXL.xlList, oldXL.counter);
@@ -25,15 +28,16 @@ public class XL extends JFrame {
         this.counter = counter;
         xlList.add(this);
         counter.increment();
-        UpdaterXL ms = new UpdaterXL();
+        ms = new UpdaterXL();
         JPanel statusPanel = new StatusPanel(statusLabel, ms);
         JPanel sheetPanel = new SheetPanel(ROWS, COLUMNS, ms);
+        sp = (SheetPanel)sheetPanel;
         Editor editor = new Editor(ms);
         ms.addEditor(editor);
         add(NORTH, statusPanel);
         add(CENTER, editor);
         add(SOUTH, sheetPanel);
-        setJMenuBar(new XLMenuBar(this, xlList, statusLabel));
+        setJMenuBar(new XLMenuBar(this, xlList, statusLabel, ms));
         pack();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
@@ -45,8 +49,17 @@ public class XL extends JFrame {
         xlList.setChanged();
     }
 
-    public void update(){
-        
+
+    public SheetPanel getSheetPanel() {
+        return sp;
+    }
+
+    public void setSlotLabelsWithLoad(){
+
+    }
+
+    public UpdaterXL getUpdater(){
+        return ms;
     }
 
     public static void main(String[] args) {

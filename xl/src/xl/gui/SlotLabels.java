@@ -15,11 +15,15 @@ import org.w3c.dom.events.MouseEvent;
 public class SlotLabels extends GridPanel {
 
     private List<SlotLabel> labelList;
-    
+    private UpdaterXL uppdateraren;
+    private int ROWS, COLUMNS;
+
     public SlotLabels(int rows, int cols, UpdaterXL ms) {
-        
         super(rows + 1, cols);
-        
+        uppdateraren = ms;
+        ROWS = rows;
+        COLUMNS = cols;
+
         labelList = new ArrayList<SlotLabel>(rows * cols);
         for (char ch = 'A'; ch < 'A' + cols; ch++) {
             add(new ColoredLabel(Character.toString(ch), Color.LIGHT_GRAY, SwingConstants.CENTER));
@@ -31,11 +35,34 @@ public class SlotLabels extends GridPanel {
                 labelList.add(label);
             }
         }
-        
+
+    }
+
+
+    public void resetBoard() {
+        // ska tömma listan och fylla med nya SlotLabel
+        labelList.clear();
+
+        for (char ch = 'A'; ch < 'A' + COLUMNS; ch++) {
+            add(new ColoredLabel(Character.toString(ch), Color.LIGHT_GRAY, SwingConstants.CENTER));
+        }
+        for (int row = 1; row <= ROWS; row++) {
+            for (char ch = 'A'; ch < 'A' + COLUMNS; ch++) {
+                SlotLabel label = new SlotLabel(ch, row, uppdateraren);
+                add(label);
+                labelList.add(label);
+            }
+        }
+
     }
 
     public List<SlotLabel> getLabels(){
         return labelList;
     }
+
+    public void setLabels(List<SlotLabel> sl){
+        labelList = sl;
+    }
    
+
 }

@@ -6,7 +6,7 @@ import xl.model.expr.Environment;
 import xl.model.expr.Expr;
 import xl.model.expr.ExprParser;
 
-public class CommentCell implements Cell{
+public class CommentCell implements Cell {
 
     private String comment;
     private ExprParser parser;
