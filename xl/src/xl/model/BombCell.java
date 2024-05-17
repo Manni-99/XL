@@ -22,5 +22,10 @@ public class BombCell implements Cell {
         throw new UnsupportedOperationException("Unimplemented method 'value'");
     }
 
+    @Override
+    public <E> double value(E e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'value'");
+    }
 
 }

@@ -10,6 +10,10 @@ public class StatusLabel extends ColoredLabel implements Observer {
         super("kkkkk", Color.WHITE);
     }
 
+    public void StatusUpdate(String str) {
+        setText(str);
+    }
+
     public void update(Observable observable, Object object) {
         setText("ppp");
     }

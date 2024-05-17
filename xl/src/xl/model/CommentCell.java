@@ -2,7 +2,7 @@ package xl.model;
 
 import xl.model.expr.Environment;
 
-public class CommentCell implements Cell{
+public class CommentCell implements Cell {
 
     @Override
     public <E> String display(E e) {
@@ -21,5 +21,11 @@ public class CommentCell implements Cell{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'value'");
     }
-    
+
+    @Override
+    public <E> double value(E e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'value'");
+    }
+
 }
