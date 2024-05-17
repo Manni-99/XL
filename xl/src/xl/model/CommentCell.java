@@ -5,7 +5,7 @@ import java.util.List;
 
 import xl.model.expr.Environment;
 
-public class CommentCell implements Cell{
+public class CommentCell implements Cell {
 
     private String comment;
     private List<String> dependentRef;

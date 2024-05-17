@@ -47,5 +47,6 @@ public class BombCell implements Cell {
     public Object getContent() {
         return content;
     }
+
 }
 
