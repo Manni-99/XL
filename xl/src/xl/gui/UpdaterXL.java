@@ -50,8 +50,8 @@ public class UpdaterXL {
     }
 
     public void setSlotInputFromEditor(String s) {
-
-        lastClicked.setText(editor.getText());
+        // editor.getText()
+        lastClicked.setText(s);
     }
 
     public void StatusTextOk() {
