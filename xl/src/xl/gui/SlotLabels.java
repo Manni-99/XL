@@ -38,6 +38,7 @@ public class SlotLabels extends GridPanel {
 
     }
 
+
     public void resetBoard() {
         // ska tömma listan och fylla med nya SlotLabel
         labelList.clear();
@@ -54,5 +55,10 @@ public class SlotLabels extends GridPanel {
         }
 
     }
+
+    public List<SlotLabel> getLabels(){
+        return labelList;
+    }
+   
 
 }

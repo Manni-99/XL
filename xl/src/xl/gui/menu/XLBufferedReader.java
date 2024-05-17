@@ -1,9 +1,13 @@
-package xl.util;
+package xl.gui.menu;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Map;
+
+import xl.gui.SlotLabel;
+import xl.gui.XL;
+import xl.util.XLException;
 
 // TODO move to another package
 public class XLBufferedReader extends BufferedReader {
@@ -13,7 +17,7 @@ public class XLBufferedReader extends BufferedReader {
     }
 
     // TODO Change Object to something appropriate
-    public void load(Map<String, Object> map) {
+    public void load(Map<String, SlotLabel> map) {
         try {
             while (ready()) {
                 String string = readLine();

@@ -27,6 +27,7 @@ public abstract class OpenMenuItem extends JMenuItem implements ActionListener {
 
     public void actionPerformed(ActionEvent event) {
         JFileChooser fileChooser = new JFileChooser(".");
+        
         FileFilter filter = new FileNameExtensionFilter("XL files", "xl");
         fileChooser.setFileFilter(filter);
         int option = openDialog(fileChooser);
