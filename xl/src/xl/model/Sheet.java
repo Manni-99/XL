@@ -11,58 +11,110 @@ public class Sheet implements Environment, Cell{
     private ExprParser checker;
 
     public Sheet() {
-        //Not yet implemented
+        this.checker = new ExprParser();
     }
      
-    public boolean add(String ref, String value) throws IOException {
-        // 1) Make an exprParser and expr
-        checker = new ExprParser();
+    public boolean add(String ref, String value) {
+        try {
 
-        Expr newCell = new Expr() {
+            // Initialize an instance of Environment
 
-            @Override
-            public String toString(int prec) {
-                return ref;
-            }
+            Environment env = new Environment() {
+                public double value(String name){
+                   for(var values : cells.entrySet()){
+                    if(name.equals(values.getKey())){
+                        return values.getValue().value(null);
+                    }
+                   }
+                   throw new IllegalArgumentException("Variable " + name + " not found");
+                }
+            };
 
-            @Override
-            public double value(Environment env) {
-                return env.value(ref);
-            }
             
-        };
-        
-        // 2) Save the old value
-         var oldCell = checker.build(value);              // We are getting the value of the reference inside our hash map
-                                                         // and parsing the value
-        // 3) Insert the bombcell
-        cells.put(ref, (Cell) newCell);
-        // 4) Provberäkna mappen
-        for (var entry : cells.entrySet()) {
-            if (Double.isInfinite(value(entry.getKey())) ||
-                    newCell == entry.getValue() && entry.getValue() == newCell) {
-                cells.replace(ref, (Cell) oldCell);
-                return false;
+
+
+            System.out.println(env.toString());
+            // Step 1: Parse the expression and check for circular reference
+            Expr expr = checker.build(value);
+            System.out.println(expr);
+
+     
+            //Step 2: Save the old cell
+            Cell oldCell = cells.get(ref);
+            
+            // Step 3: Add the "bomb cell"
+            cells.put(ref, new BombCell(value));
+
+
+            // Step 4: Evaluate the expression to ensure it's valid and handle division by zero cases
+            double result = expr.value(env);
+            Set<String> visited = new HashSet<>();
+            if (hasCircularReference(ref, visited) || Double.isInfinite(result) || Double.isNaN(result)) {
+                cells.put(ref, oldCell);
+                return false; // Circular reference detected or division by zero or other invalid result, abort
+            }
+
+            
+    
+            // Step 5: Insert the cell
+            ExpCell newCell = new ExpCell(expr);
+            cells.put(ref, newCell);
+    
+        // Step 6: Recalculate all cells with a value (optional)
+        for (String cellRef : cells.keySet()) {
+            if (cells.get(cellRef) instanceof ExpCell) {
+                
+                    result = cells.get(cellRef).value(env);
+                    visited.clear();
+
+                    // Check for circular references
+                    if (hasCircularReference(cellRef, visited)) {
+                        cells.put(ref, oldCell);
+                        throw new IllegalArgumentException("Circular reference detected");
+                    }
+
+                    // Check for division by zero
+                    if (Double.isInfinite(result) || Double.isNaN(result)) {
+                        cells.put(ref, oldCell);
+                        throw new ArithmeticException("Division by zero");
+                    }
+                
             }
         }
-            // 5) Insert the new value
-            
-            //cells.put(ref, (Cell) newCell);
+    
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+    
 
-            // 6) Calculate all cells with a value
-            for (var entry1 : cells.entrySet()) {
-                for (var entry2 : cells.entrySet()) {
-                    if (Double.isInfinite((value(entry2.getKey()))) ||
-                            checker.build(entry1.getKey()) == entry2.getValue() 
-                            && checker.build(entry2.getKey()) == entry1.getValue()) {
-                        cells.replace(ref, (Cell) oldCell);
-                        return false;
+    
+    private boolean hasCircularReference(String ref, Set<String> visited){
+        System.out.println("Begining of hasCircularReference recursive method");
+            if(visited.contains(ref)){
+                return true;
+            }
+            visited.add(ref);
+            System.out.println("Before the if case of CommentCell");
+            CommentCell cell = (CommentCell) cells.get(ref);
+            System.out.println(cell);
+            if(cell != null && cell instanceof CommentCell ){
+                CommentCell commentCell = cell;
+                System.out.println("Before the for loop of CommentCell");
+
+                for(String dependentRef : commentCell.getDependantRef()){
+                    System.out.println(dependentRef + " " + "This is the for loop x" + commentCell.getDependantRef().toString());
+                    if(hasCircularReference(dependentRef, visited)){
+                        return true;
                     }
                 }
             }
-            return true;
+            System.out.println("End of hasCircularReference recursive method");
+            visited.remove(ref);
+            return false;
         }
-        
     
     public String load(InputStream filePath) throws IOException{
         StringBuilder sb = new StringBuilder();
@@ -100,10 +152,16 @@ public class Sheet implements Environment, Cell{
 
     public void clearAll(){
        cells.clear();
+       
     }
     @Override
     public <E> String display(E ref) {
-        return null;
+       for(var reference : cells.entrySet()){
+        if(ref.equals(reference.getKey())){
+            return reference.getValue().toString();
+        }
+       }
+       return null;
     }
 
     @Override
@@ -113,7 +171,8 @@ public class Sheet implements Environment, Cell{
 
     @Override   //Cell implementation
     public <E> double value(E ref) {
-        return cells.get(ref).value(ref);
+       // return cells.get(ref).value(ref);
+       return 0.0;
     }
 
     @Override   //Environment implementation
@@ -127,5 +186,13 @@ public class Sheet implements Environment, Cell{
         return 0.0;
     }
 
-
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry<String, Cell> entry : cells.entrySet()) {
+            sb.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
+        }
+        return sb.toString();
+    }
+    
+    
 }
