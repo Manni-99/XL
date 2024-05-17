@@ -59,6 +59,10 @@ public class SlotLabels extends GridPanel {
     public List<SlotLabel> getLabels(){
         return labelList;
     }
+
+    public void setLabels(List<SlotLabel> sl){
+        labelList = sl;
+    }
    
 
 }
