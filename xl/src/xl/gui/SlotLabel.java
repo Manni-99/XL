@@ -7,8 +7,8 @@ import javax.swing.Action;
 
 
 public class SlotLabel extends ColoredLabel implements MouseListener{
-    MouseListenerXL a;
-    public SlotLabel(char col, int row, MouseListenerXL a) {
+    UpdaterXL a;
+    public SlotLabel(char col, int row, UpdaterXL a) {
         super("                   ", Color.WHITE, RIGHT);
         setName(String.valueOf(col) + row);
         this.addMouseListener(this);

@@ -16,7 +16,7 @@ public class SlotLabels extends GridPanel {
 
     private List<SlotLabel> labelList;
     
-    public SlotLabels(int rows, int cols, MouseListenerXL ms) {
+    public SlotLabels(int rows, int cols, UpdaterXL ms) {
         
         super(rows + 1, cols);
         
@@ -27,13 +27,10 @@ public class SlotLabels extends GridPanel {
         for (int row = 1; row <= rows; row++) {
             for (char ch = 'A'; ch < 'A' + cols; ch++) {
                 SlotLabel label = new SlotLabel(ch, row, ms);
-                label.addMouseListener(ms);
                 add(label);
                 labelList.add(label);
             }
         }
-        // SlotLabel firstLabel = labelList.get(1);
-        // firstLabel.setBackground(Color.YELLOW);
         
     }
    

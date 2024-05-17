@@ -25,11 +25,11 @@ public class XL extends JFrame {
         this.counter = counter;
         xlList.add(this);
         counter.increment();
-        MouseListenerXL ms = new MouseListenerXL();
+        UpdaterXL ms = new UpdaterXL();
         JPanel statusPanel = new StatusPanel(statusLabel, ms);
         JPanel sheetPanel = new SheetPanel(ROWS, COLUMNS, ms);
-        Editor editor = new Editor();
-             
+        Editor editor = new Editor(ms);
+        ms.addEditor(editor);
         add(NORTH, statusPanel);
         add(CENTER, editor);
         add(SOUTH, sheetPanel);
