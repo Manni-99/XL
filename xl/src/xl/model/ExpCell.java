@@ -1,25 +1,41 @@
 package xl.model;
 
 import xl.model.expr.Environment;
+import xl.model.expr.Expr;
 
 public class ExpCell implements Cell {
+    private Expr expression;
 
-    @Override
-    public <E> String display(E e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'display'");
+    public ExpCell(Expr expression) {
+        this.expression = expression;
     }
 
     @Override
-    public <E> String formula(E e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'formula'");
+    public String display(Object o) {
+        // Return the string representation of the expression
+        return expression.toString();
     }
 
     @Override
-    public double value(Environment e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'value'");
+    public String formula(Object o) {
+        // Return the formula representation of the expression
+        return expression.toString();
     }
-    
+
+    @Override
+    public double value(Object o) {
+        // Evaluate the expression using the provided environment
+        if (o instanceof Environment) {
+            Environment env = (Environment) o;
+            return expression.value(env);
+        } else {
+            throw new IllegalArgumentException("Environment object required for value calculation");
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "" + expression + "";
+}
+
 }
