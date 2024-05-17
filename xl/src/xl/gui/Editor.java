@@ -7,15 +7,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Editor extends JTextField implements ActionListener{
-
-    public Editor() {
+    UpdaterXL ms;
+    public Editor(UpdaterXL ms) {
         setBackground(Color.WHITE);
         addActionListener(this);
+        this.ms = ms;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(getText());
-        
+        ms.setSlotInputFromEditor(getText());
     }
 }
