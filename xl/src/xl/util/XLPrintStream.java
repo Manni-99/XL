@@ -1,4 +1,4 @@
-package xl.gui.menu;
+package xl.util;
 
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
