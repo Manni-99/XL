@@ -21,18 +21,8 @@ public class Editor extends JTextField implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         String currentTextInEditor = getText();
-        String reference = "";
-        String value = currentTextInEditor.substring(1);
-        System.out.println(reference);
-        System.out.println(value);
-        // testa input med sheet.add!
-        // reference är vilken adress man är på just nu
-        //if(sheet.add(reference, value)){
+        //if(sheet.add(ms.getLastClicked().getName(), currentTextInEditor)){
             ms.setSlotInputFromEditor(currentTextInEditor);
-       // }
-        
-
-        
-        // testa om input är rimlig?
+        //}
     }
 }
