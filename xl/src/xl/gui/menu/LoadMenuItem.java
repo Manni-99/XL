@@ -16,26 +16,33 @@ class LoadMenuItem extends OpenMenuItem {
 
     protected void action(String path) throws FileNotFoundException {
         File file = new File(path);
-        List <SlotLabel> ss = new ArrayList<SlotLabel>();
-       
 
+       
+        StringBuilder ss = new StringBuilder();
         try(Scanner scanner = new Scanner(file)){
             while(scanner.hasNextLine()){
                 //data.append(scanner.nextLine()).append("\n");
-                String temp = scanner.nextLine();
-                SlotLabel q = new SlotLabel('A', 0, xl.getUpdater());
-                q.setText(temp);
-                ss.add(q);
+                String currentLine = scanner.nextLine();
+                putTheLabel(currentLine);
+                
+                
+                
             }
           
         }
-        int count = 0;
-        for(SlotLabel q :  xl.getSheetPanel().getSlotLabels().getLabels()){
-            q.setText(ss.get(count).getText());
-            count++;
-        }
+        
     }
-
+    private void putTheLabel(String currentLine){
+        String adress = currentLine.substring(0,2); // Adress
+        String[] content = currentLine.split("=");
+    
+        for(SlotLabel t : xl.getSheetPanel().getSlotLabels().getLabels()){
+            if(adress.equals(t.getName())){
+                t.setText(content[1]);
+            }
+        }
+       
+    }
     protected int openDialog(JFileChooser fileChooser) {
         return fileChooser.showOpenDialog(xl);
     }
