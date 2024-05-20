@@ -36,12 +36,22 @@ public class BombCell implements Cell {
     boolean matches;
 
     try{
+        // Checks if the content starts with # or !
         if(commentPattern.matcher(s).matches()){
             return new CommentCell((String) content);
         }
-        if(exprPattern.matcher(s).matches()) {
+
+        // Checks if the content is an Expression
+        if(parser.build(s) instanceof Expr && content != null){
             return new ExpCell((Expr) content);
         }
+
+
+       // if(exprPattern.matcher(s).matches()) {
+        //    return new ExpCell((Expr) content);
+        //}
+
+
     } catch (Exception e) {
         throw new IllegalArgumentException("Unsupported content type: " + content.getClass());
     }
