@@ -17,7 +17,8 @@ class SaveMenuItem extends OpenMenuItem {
         List<SlotLabel> qr = xl.getSheetPanel().getSlotLabels().getLabels();
         String fileString = "";
         for(SlotLabel q : qr){
-            fileString += q.toString() + "\n";
+            if(!q.toString().trim().isEmpty())
+            fileString += q.getName() +  "="+ q.toString() + " =\n";
         }
         File file = new File(path + ".xl");
         

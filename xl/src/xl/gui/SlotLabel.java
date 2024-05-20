@@ -19,6 +19,10 @@ public class SlotLabel extends ColoredLabel implements MouseListener {
         return this.getText();
     }
 
+    // public String getName(){
+    //     return getName();
+    // }
+
     public void update() {
         a.getCR().setText(getName());
         a.setLastClicked(this);

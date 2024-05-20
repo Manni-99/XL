@@ -18,6 +18,7 @@ public class UpdaterXL {
 
     public UpdaterXL() {
         sheet = new Sheet();
+        
     }
 
     // __________________________________________Addderade attribut
@@ -43,6 +44,10 @@ public class UpdaterXL {
         return cr;
     }
 
+    public void setDefaultClicked(SlotLabel q){
+        lastClicked = q;
+        lastClicked.setBackground(Color.YELLOW);
+    }
     public void setLastClicked(SlotLabel q) {
         if (lastClicked != null) {
             lastClicked.setBackground(Color.WHITE);
