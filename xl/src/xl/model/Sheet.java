@@ -84,7 +84,7 @@ public class Sheet implements Environment, Cell {
 
                 expr = checker.build(value); // Here we can build multiple values
                 
-                System.out.println(expr.toString());
+                System.out.println(expr.value(env));
 
             } else {
                 String variableKey = value.substring(1);
@@ -262,8 +262,9 @@ public class Sheet implements Environment, Cell {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        
         for (Map.Entry<String, Cell> entry : cells.entrySet()) {
-            sb.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
+            sb.append(entry.getKey()).append(": ").append(entry.getValue().display(null)).append("\n");
         }
         return sb.toString();
     }
