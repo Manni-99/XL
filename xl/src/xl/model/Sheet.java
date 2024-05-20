@@ -38,9 +38,10 @@ public class Sheet implements Environment, Cell {
         if(cellRefPattern.matcher(ref).matches()){
             char a = ref.charAt(0);
             char b = ref.charAt(1);
+            System.out.println(a);
             String tempA = String.valueOf(a);
             String tempB = String.valueOf(b);
-            if(!alphPattern.matcher(tempA).matches()){
+            if(numberPattern.matcher(tempA).matches()){
                 return false;
             }
         }

@@ -14,7 +14,7 @@ public class tester {
         Sheet xl = new Sheet();
         xl.add("A2", "6");
         xl.add("A3", "6");
-        //xl.add("A4", "100");
+        xl.add("A4", "100");
         //xl.add("A5", "6");
         //xl.add("A6", "=A2");
         //xl.add("A7", "=A4");
