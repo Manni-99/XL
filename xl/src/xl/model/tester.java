@@ -12,8 +12,8 @@ public class tester {
 
 
         Sheet xl = new Sheet();
+
         xl.add("A2", "24/2");
-       
         xl.add("A3", "6");
         xl.add("A4", "100");
         xl.add("A5", "6");
