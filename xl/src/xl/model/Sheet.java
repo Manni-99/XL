@@ -16,9 +16,9 @@ public class Sheet implements Environment, Cell {
 
     public boolean add(String ref, String value) {
 
-        if(ref.matches("^\\d.*")){
-            return false;   
-            //Base case, if a reference begins with a number, return false;
+        if (ref.matches("^\\d.*")) {
+            return false;
+            // Base case, if a reference begins with a number, return false;
         }
 
         Environment env = new Environment() {
@@ -36,7 +36,7 @@ public class Sheet implements Environment, Cell {
                     } else {
                         // If the variable doesn't exist, handle it accordingly (e.g., throw an
                         // exception)
-                        //We will return null or 0.0
+                        // We will return null or 0.0
                         return 0.0;
                     }
                 } else {
@@ -45,32 +45,44 @@ public class Sheet implements Environment, Cell {
                         return Double.parseDouble(value);
                     } catch (NumberFormatException e) {
                         // Handle the case where the value cannot be parsed to a double
-                        throw new IllegalArgumentException("Invalid literal value: " + value);
+                        throw new IllegalArgumentException("Invalid literal value: " + value); // Tomt
                     }
                 }
             }
         };
 
-        System.out.println(env.value(value));
         // Step 1: Parse the expression and check for circular reference
-        Expr expr = null;
-        if(!isVariable(value)){
+        Expr expr = null; // Figure out why expr is always null
         try {
-            expr = checker.build(value);
+            if (!isVariable(value)) { // If the value is a number or a comment
+
+                expr = checker.build(value); // Here we can build multiple values
+                System.out.println(expr.toString());
+
+            } else {
+                String variableKey = value.substring(1);
+                System.out.println(variableKey);
+              //  System.out.println(cells.get(variableKey).value(this));
+                if (cells.containsKey(variableKey)) {
+                   
+                        expr = checker.build(cells.get(variableKey).display(this));
+
+                } 
+            }
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+
         }
-    }
 
         // Step 2: Save the old cell
         Cell oldCell = cells.get(ref);
 
         // Step 3: Add the "bomb cell"
-        cells.put(ref, new BombCell(Double.toString(env.value(value))));
+        cells.put(ref, new BombCell(expr));
 
         // Step 4: Evaluate the expression to ensure it's valid and handle division by
         // zero cases
+        
         double result = cells.get(ref).value(env);
         System.out.println(result);
         Set<String> visited = new HashSet<>();
@@ -81,8 +93,8 @@ public class Sheet implements Environment, Cell {
         }
 
         // Step 5: Insert the cell
-        System.out.println(isVariable(value));
-        System.out.println(value);
+        // System.out.println(isVariable(value));
+        // System.out.println(value);
         Cell newCell;
         if (isVariable(value)) {
             newCell = new ExpCell(expr);

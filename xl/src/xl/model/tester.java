@@ -12,13 +12,15 @@ public class tester {
 
 
         Sheet xl = new Sheet();
-        xl.add("2", "2");
         xl.add("A2", "6");
-        xl.add("A4", "30");
-        xl.add("A5", "=A2");
-       /* xl.add("A1", "4");
-        xl.add("A3", "A1");
-        xl.add("A1", "A1");*/
+        xl.add("A3", "6");
+        xl.add("A4", "100");
+        xl.add("A5", "6");
+        xl.add("A6", "=A2");
+        xl.add("A7", "=A4");
+        xl.add("A7", "=B4");
+
+
         System.out.println(xl.toString());
     }
 }
