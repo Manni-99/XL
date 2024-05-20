@@ -21,16 +21,24 @@ public class ClearMenuItem extends JMenuItem implements ActionListener {
         // TODO metod eller lösning som kopplar med sheet.add() att ett null objekt kan
         // läggas in kanske ska gå att ta bort en ruta ändå, men meddelande till status
         // om referenser eller division med noll skapas
+        ClearOneMenuItem();
 
-        System.out.println("clear menu item");
-        if (empty != null) {
-            empty.ClearColor();
-            ms.setSlotInputFromEditor(null);
-            empty = null;
-        }
     }
 
     public void addSlotToClear(SlotLabel slot) {
         empty = slot;
     }
+
+    private void ClearOneMenuItem() {
+        System.out.println("clear menu item");
+        if (empty != null) {
+            // if (ms.ClearOneCell()) {
+            empty.ClearColor();
+            ms.setSlotInputFromEditor(null);
+            empty = null;
+            // }
+
+        }
+    }
+
 }

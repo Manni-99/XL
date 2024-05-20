@@ -88,12 +88,12 @@ public class Sheet implements Environment, Cell {
             } else {
                 String variableKey = value.substring(1);
                 System.out.println(variableKey);
-              //  System.out.println(cells.get(variableKey).value(this));
+                // System.out.println(cells.get(variableKey).value(this));
                 if (cells.containsKey(variableKey)) {
-                   
-                        expr = checker.build(cells.get(variableKey).display(this));
 
-                } 
+                    expr = checker.build(cells.get(variableKey).display(this));
+
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -108,7 +108,7 @@ public class Sheet implements Environment, Cell {
 
         // Step 4: Evaluate the expression to ensure it's valid and handle division by
         // zero cases
-        
+
         double result = cells.get(ref).value(env);
         System.out.println(result);
         Set<String> visited = new HashSet<>();
@@ -261,6 +261,28 @@ public class Sheet implements Environment, Cell {
             sb.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
         }
         return sb.toString();
+    }
+
+    // ----- Inlagd av erik för att arbeta med ClearAll
+    public boolean resetMapReferences() {
+        boolean flag = false;
+        cells.clear();
+
+        if (cells.size() == 0) {
+            flag = true;
+            System.out.println("I sheet.java har Map.Referenser tömts");
+        } else {
+            System.out.println("I sheet.java har Map.Referenser inte tömts");
+        }
+        return flag;
+    }
+
+    public boolean clearOneCell(String str) {
+        boolean kanRensa;
+
+        kanRensa = add(str, null);
+
+        return kanRensa;
     }
 
 }

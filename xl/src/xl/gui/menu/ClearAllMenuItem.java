@@ -23,7 +23,6 @@ class ClearAllMenuItem extends JMenuItem implements ActionListener {
         // TODO behöver läggas till metod eller lösning som raderar alla referanser
         // från sheet så den och alla listor vi skapar med input är tomma
 
-        ms.resetUpdaterXL();
         reset();
         System.out.println("allt clear");
         ms.getStatusLabel().setText(" ");
@@ -31,14 +30,17 @@ class ClearAllMenuItem extends JMenuItem implements ActionListener {
     }
 
     public void reset() {
-
         for (SlotLabel slot : sheetPanel.getSlotLabels().getLabels()) {
             ms.setLastClicked(slot);
             ms.setSlotInputFromEditor(null);
             // slot.setText(null);
             slot.ClearColor();
         }
-        ms.setDefaultClicked(sheetPanel.getSlotLabels().getLabels().get(0));
+
+        ms.resetUpdaterXL();
+
+        //ms.setDefaultClicked(sheetPanel.getSlotLabels().getLabels().get(0));
+
     }
 
 }

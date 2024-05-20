@@ -49,12 +49,12 @@ public class XL extends JFrame {
         add(NORTH, statusPanel);
         add(CENTER, editor);
         add(SOUTH, sheetPanel);
-        setJMenuBar(new XLMenuBar(this, xlList, statusLabel, ms, (SheetPanel) sheetPanel));
+        setJMenuBar(new XLMenuBar(this, xlList, statusLabel, ms, sp));
         pack();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         setVisible(true);
-        
+
     }
 
     public void rename(String title) {
