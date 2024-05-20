@@ -27,11 +27,12 @@ public class BombCell implements Cell {
         this.parser = new ExprParser();
     }
 
-    public Object buildBombCell(Object content) {
+    public Object buildBombCell(Object env) {
     String s = (String) content;
     Pattern commentPattern = Pattern.compile("[!,#]");
-    Pattern exprPattern = Pattern.compile("[0-9]");
-    Pattern stringPattern = Pattern.compile("[a-z,A-Z]");
+    Pattern alphPattern = Pattern.compile("[a-z, A-Z]");
+    Pattern numberPattern = Pattern.compile("[0-9]");
+    Pattern cellRef = Pattern.compile("[a-z,A-Z,0-9]");
     Matcher matcher;
     boolean matches;
 
@@ -42,15 +43,25 @@ public class BombCell implements Cell {
         }
 
         // Checks if the content is an Expression
-        if(parser.build(s) instanceof Expr && content != null){
+        Expr newExpr = parser.build(s);
+        if(newExpr instanceof Expr && content != null){
+            value((newExpr));
             return new ExpCell((Expr) content);
         }
-
-
-       // if(exprPattern.matcher(s).matches()) {
-        //    return new ExpCell((Expr) content);
-        //}
-
+/*
+        if(cellRef.matcher(s).matches()){
+            char a = s.charAt(0);
+            char b = s.charAt(1);
+            String tempA = String.valueOf(a);
+            String tempB = String.valueOf(b);
+            if(alphPattern.matcher(tempA).matches()){
+                if(numberPattern.matcher(tempB).matches()){
+                    return new CommentCell("#REF");
+                }
+            }
+            return new ExpCell((Expr) content);
+        }
+ */
 
     } catch (Exception e) {
         throw new IllegalArgumentException("Unsupported content type: " + content.getClass());
@@ -74,6 +85,7 @@ public class BombCell implements Cell {
         // Evaluate the content using the provided environment
         if (o instanceof Environment) {
             Environment env = (Environment) o;
+            
             if (content instanceof Expr) {
                 // Evaluate the expression if content is an Expr
                 return ((Expr) content).value(env);
@@ -96,6 +108,7 @@ public class BombCell implements Cell {
         }
         return 0;
     }
+    
 
     public Object getContent() {
         return content;

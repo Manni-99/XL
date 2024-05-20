@@ -1,26 +1,56 @@
 package xl.model;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.io.*;
 import xl.model.expr.Environment;
 import xl.model.expr.Expr;
 import xl.model.expr.ExprParser;
 
+
+//matcher
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Sheet implements Environment, Cell {
     private Map<String, Cell> cells = new HashMap<>();
     private ExprParser checker;
+
 
     public Sheet() {
         this.checker = new ExprParser();
     }
 
     public boolean add(String ref, String value) {
+        // matcher
+        Pattern alphPattern = Pattern.compile("[a-z, A-Z]");
+        Pattern numberPattern = Pattern.compile("[0-9]");
+        Pattern cellRefPattern = Pattern.compile("[a-z,A-Z,0-9]");
+        Matcher matcher;
+        boolean matches;
 
-        if (ref.matches("^\\d.*")) {
+        /*if (ref.matches("^\\d.*")) {
             return false;
             // Base case, if a reference begins with a number, return false;
+        } */
+        //ovan bytt mot denna
+        if(cellRefPattern.matcher(ref).matches()){
+            char a = ref.charAt(0);
+            char b = ref.charAt(1);
+            String tempA = String.valueOf(a);
+            String tempB = String.valueOf(b);
+            if(alphPattern.matcher(tempA).matches()){
+                if(numberPattern.matcher(tempB).matches()){
+                    return true;
+                }
+            }
+        }
+        else{
+            return false;
         }
 
+    
         Environment env = new Environment() {
 
             public double value(String value) {

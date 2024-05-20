@@ -30,6 +30,7 @@ class LoadMenuItem extends OpenMenuItem {
             }
           
         }
+        statusLabel.setText(path + " loaded" );
         
     }
     private void putTheLabel(String currentLine){
@@ -39,6 +40,8 @@ class LoadMenuItem extends OpenMenuItem {
         for(SlotLabel t : xl.getSheetPanel().getSlotLabels().getLabels()){
             if(adress.equals(t.getName())){
                 t.setText(content[1]);
+            }else{
+                t.setText(" ");
             }
         }
        
