@@ -30,8 +30,8 @@ public class BombCell implements Cell {
     public Object buildBombCell(Object content) {
     String s = (String) content;
     Pattern commentPattern = Pattern.compile("[!,#]");
-    Pattern exprPattern = Pattern.compile("[0-9]");
-    Pattern stringPattern = Pattern.compile("[a-z,A-Z]");
+    Pattern alphPattern = Pattern.compile("[a-z, A-Z]");
+    Pattern cellRef = Pattern.compile("[a-z,A-Z,0-9]");
     Matcher matcher;
     boolean matches;
 
@@ -46,10 +46,14 @@ public class BombCell implements Cell {
             return new ExpCell((Expr) content);
         }
 
-
-       // if(exprPattern.matcher(s).matches()) {
-        //    return new ExpCell((Expr) content);
-        //}
+        if(cellRef.matcher(s).matches()){
+            char a = s.charAt(0);
+            String tempA = String.valueOf(a);
+            if(alphPattern.matcher(tempA).matches()){
+                
+            }
+            return new ExpCell((Expr) content);
+        }
 
 
     } catch (Exception e) {
@@ -74,6 +78,7 @@ public class BombCell implements Cell {
         // Evaluate the content using the provided environment
         if (o instanceof Environment) {
             Environment env = (Environment) o;
+            
             if (content instanceof Expr) {
                 // Evaluate the expression if content is an Expr
                 return ((Expr) content).value(env);
