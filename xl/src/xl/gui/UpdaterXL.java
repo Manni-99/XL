@@ -49,9 +49,9 @@ public class UpdaterXL {
         lastClicked.setBackground(Color.YELLOW);
     }
     public void setLastClicked(SlotLabel q) {
-        if (lastClicked != null) {
-            lastClicked.setBackground(Color.WHITE);
-        }
+        editor.setText(q.getText().trim());
+        lastClicked.setBackground(Color.WHITE);
+        
         clearMenu.addSlotToClear(q);
         lastClicked = q;
         q.setBackground(Color.YELLOW);
@@ -72,6 +72,10 @@ public class UpdaterXL {
 
     public void resetUpdaterXL() {
         sheet = new Sheet();
+    }
+
+    public StatusLabel getStatusLabel(){
+        return status;
     }
 
 }

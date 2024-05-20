@@ -26,6 +26,8 @@ class ClearAllMenuItem extends JMenuItem implements ActionListener {
         ms.resetUpdaterXL();
         reset();
         System.out.println("allt clear");
+        ms.getStatusLabel().setText(" ");
+        
     }
 
     public void reset() {
@@ -36,6 +38,7 @@ class ClearAllMenuItem extends JMenuItem implements ActionListener {
             // slot.setText(null);
             slot.ClearColor();
         }
+        ms.setDefaultClicked(sheetPanel.getSlotLabels().getLabels().get(0));
     }
 
 }

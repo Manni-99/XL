@@ -32,6 +32,7 @@ public class XL extends JFrame {
         this.sheet = new Sheet();
         // ----- insatt av gruppen -----
         UpdaterXL ms = new UpdaterXL();
+        ms.addStatus(statusLabel);
 
         // -----
 
