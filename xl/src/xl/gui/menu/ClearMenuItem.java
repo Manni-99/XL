@@ -18,11 +18,10 @@ public class ClearMenuItem extends JMenuItem implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        // TODO
-        //
-        // Kontrolera mot add att det är ok
-        // update referenses to this slot
-        // --kanske skulle funka genom att använda add och lägga in en tom cell
+        // TODO metod eller lösning som kopplar med sheet.add() att ett null objekt kan
+        // läggas in kanske ska gå att ta bort en ruta ändå, men meddelande till status
+        // om referenser eller division med noll skapas
+
         System.out.println("clear menu item");
         if (empty != null) {
             empty.ClearColor();
@@ -32,7 +31,6 @@ public class ClearMenuItem extends JMenuItem implements ActionListener {
     }
 
     public void addSlotToClear(SlotLabel slot) {
-
         empty = slot;
     }
 }
