@@ -1,4 +1,4 @@
-package xl.gui.menu;
+package xl.util;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

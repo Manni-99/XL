@@ -28,7 +28,6 @@ public class XL extends JFrame {
         this.counter = counter;
         xlList.add(this);
         counter.increment();
-<<<<<<< xl/src/xl/gui/XL.java
 
         // ----- insatt av gruppen -----
         UpdaterXL ms = new UpdaterXL();
@@ -39,7 +38,7 @@ public class XL extends JFrame {
         JPanel sheetPanel = new SheetPanel(ROWS, COLUMNS, ms);
 
         // ----- insatt av gruppen ------
-        sp = (SheetPanel)sheetPanel;
+        sp = (SheetPanel) sheetPanel;
 
         Editor editor = new Editor(ms);
         ms.addEditor(editor);
@@ -60,16 +59,15 @@ public class XL extends JFrame {
         xlList.setChanged();
     }
 
-
     public SheetPanel getSheetPanel() {
         return sp;
     }
 
-    public void setSlotLabelsWithLoad(){
+    public void setSlotLabelsWithLoad() {
 
     }
 
-    public UpdaterXL getUpdater(){
+    public UpdaterXL getUpdater() {
         return ms;
     }
 
