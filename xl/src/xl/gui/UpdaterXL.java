@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.event.*;
 import java.util.*;
 
+import xl.model.*;
 import xl.gui.menu.ClearMenuItem;
 
 public class UpdaterXL {
@@ -13,9 +14,10 @@ public class UpdaterXL {
     private Editor editor;
     private StatusLabel status;
     private ClearMenuItem clearMenu;
+    private Sheet sheet;
 
     public UpdaterXL() {
-
+        sheet = new Sheet();
     }
 
     // __________________________________________Addderade attribut
@@ -34,6 +36,7 @@ public class UpdaterXL {
     public void addClearMenuItem(ClearMenuItem clearEye) {
         clearMenu = clearEye;
     }
+
     // ___________________________________________________________________
 
     public CurrentLabel getCR() {
@@ -56,6 +59,10 @@ public class UpdaterXL {
 
     public void StatusTextOk() {
         status.StatusUpdate("Insättning ok!");
+    }
+
+    public void resetUpdaterXL() {
+        sheet = new Sheet();
     }
 
 }

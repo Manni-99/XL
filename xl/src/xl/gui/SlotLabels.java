@@ -38,11 +38,10 @@ public class SlotLabels extends GridPanel {
 
     }
 
-
     public void resetBoard() {
         // ska tömma listan och fylla med nya SlotLabel
-        labelList.clear();
 
+        labelList = new ArrayList<SlotLabel>(ROWS * COLUMNS);
         for (char ch = 'A'; ch < 'A' + COLUMNS; ch++) {
             add(new ColoredLabel(Character.toString(ch), Color.LIGHT_GRAY, SwingConstants.CENTER));
         }
@@ -56,7 +55,7 @@ public class SlotLabels extends GridPanel {
 
     }
 
-    public List<SlotLabel> getLabels(){
+    public List<SlotLabel> getLabels() {
         return labelList;
     }
 
