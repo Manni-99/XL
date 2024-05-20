@@ -48,7 +48,7 @@ public class BombCell implements Cell {
             value((newExpr));
             return new ExpCell((Expr) content);
         }
-
+/*
         if(cellRef.matcher(s).matches()){
             char a = s.charAt(0);
             char b = s.charAt(1);
@@ -61,7 +61,7 @@ public class BombCell implements Cell {
             }
             return new ExpCell((Expr) content);
         }
-
+ */
 
     } catch (Exception e) {
         throw new IllegalArgumentException("Unsupported content type: " + content.getClass());
