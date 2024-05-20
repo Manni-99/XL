@@ -36,6 +36,7 @@ public class SlotLabels extends GridPanel {
             }
         }
         ms.setDefaultClicked(labelList.get(0));
+        ms.getCR().setText(labelList.get(0).getName());
 
     }
 

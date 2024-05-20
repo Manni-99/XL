@@ -24,6 +24,7 @@ class SaveMenuItem extends OpenMenuItem {
         
         try (PrintWriter out = new PrintWriter(file)) {
             out.print(fileString);
+            statusLabel.setText(path + ".xl saved");
         }
     }
 

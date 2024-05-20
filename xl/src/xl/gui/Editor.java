@@ -23,6 +23,13 @@ public class Editor extends JTextField implements ActionListener{
         String currentTextInEditor = getText();
         //if(sheet.add(ms.getLastClicked().getName(), currentTextInEditor)){
             ms.setSlotInputFromEditor(currentTextInEditor);
+            
         //}
+
+        if(getText().equals("Error")){
+            ms.getStatusLabel().setText("Error");
+        }else{
+            ms.getStatusLabel().setText(" ");
+        }
     }
 }
