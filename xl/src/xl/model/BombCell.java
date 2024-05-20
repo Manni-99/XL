@@ -85,7 +85,6 @@ public class BombCell implements Cell {
         // Evaluate the content using the provided environment
         if (o instanceof Environment) {
             Environment env = (Environment) o;
-            
             if (content instanceof Expr) {
                 // Evaluate the expression if content is an Expr
                 return ((Expr) content).value(env);
