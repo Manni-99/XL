@@ -89,9 +89,9 @@ public class Sheet implements Environment, Cell {
                 System.out.println(variableKey);
                 // System.out.println(cells.get(variableKey).value(this));
                 if (cells.containsKey(variableKey)) {
-
                     expr = checker.build(cells.get(variableKey).display(this));
-
+                } else {
+                    return false;
                 }
             }
         } catch (IOException e) {
