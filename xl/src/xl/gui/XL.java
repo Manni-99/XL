@@ -17,6 +17,7 @@ public class XL extends JFrame {
     private XLList xlList;
     private SheetPanel sp;
     private UpdaterXL ms;
+    private Sheet sheet;
 
     public XL(XL oldXL) {
         this(oldXL.xlList, oldXL.counter);
@@ -28,7 +29,7 @@ public class XL extends JFrame {
         this.counter = counter;
         xlList.add(this);
         counter.increment();
-
+        this.sheet = new Sheet();
         // ----- insatt av gruppen -----
         UpdaterXL ms = new UpdaterXL();
 
@@ -40,7 +41,7 @@ public class XL extends JFrame {
         // ----- insatt av gruppen ------
         sp = (SheetPanel) sheetPanel;
 
-        Editor editor = new Editor(ms);
+        Editor editor = new Editor(ms, sheet);
         ms.addEditor(editor);
         // -----
 
@@ -52,6 +53,7 @@ public class XL extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         setVisible(true);
+        
     }
 
     public void rename(String title) {

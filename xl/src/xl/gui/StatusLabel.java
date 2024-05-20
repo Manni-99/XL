@@ -7,7 +7,7 @@ import java.util.Observer;
 public class StatusLabel extends ColoredLabel implements Observer {
 
     public StatusLabel() {
-        super("kkkkk", Color.WHITE);
+        super("", Color.WHITE);
     }
 
     public void StatusUpdate(String str) {
@@ -15,6 +15,6 @@ public class StatusLabel extends ColoredLabel implements Observer {
     }
 
     public void update(Observable observable, Object object) {
-        setText("ppp");
+        setText("");
     }
 }
