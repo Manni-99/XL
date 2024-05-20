@@ -26,20 +26,19 @@ class ClearAllMenuItem extends JMenuItem implements ActionListener {
         reset();
         System.out.println("allt clear");
         ms.getStatusLabel().setText(" ");
-        
+
     }
 
     public void reset() {
         for (SlotLabel slot : sheetPanel.getSlotLabels().getLabels()) {
-            ms.setLastClicked(slot);
+            ms.resetAllSlots(slot);
             ms.setSlotInputFromEditor(null);
             // slot.setText(null);
             slot.ClearColor();
         }
 
         ms.resetUpdaterXL();
-
-        //ms.setDefaultClicked(sheetPanel.getSlotLabels().getLabels().get(0));
+        ms.setDefaultClicked(sheetPanel.getSlotLabels().getLabels().get(0));
 
     }
 

@@ -8,7 +8,6 @@ import xl.model.expr.Environment;
 import xl.model.expr.Expr;
 import xl.model.expr.ExprParser;
 
-
 //matcher
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,7 +15,6 @@ import java.util.regex.Pattern;
 public class Sheet implements Environment, Cell {
     private Map<String, Cell> cells = new HashMap<>();
     private ExprParser checker;
-
 
     public Sheet() {
         this.checker = new ExprParser();
@@ -30,23 +28,24 @@ public class Sheet implements Environment, Cell {
         Matcher matcher;
         boolean matches;
 
-        /*if (ref.matches("^\\d.*")) {
-            return false;
-            // Base case, if a reference begins with a number, return false;
-        } */
-        //ovan bytt mot denna
-        if(cellRefPattern.matcher(ref).matches()){
+        /*
+         * if (ref.matches("^\\d.*")) {
+         * return false;
+         * // Base case, if a reference begins with a number, return false;
+         * }
+         */
+        // ovan bytt mot denna
+        if (cellRefPattern.matcher(ref).matches()) {
             char a = ref.charAt(0);
-           // char b = ref.charAt(1);
+            // char b = ref.charAt(1);
             System.out.println(a);
             String tempA = String.valueOf(a);
-           // String tempB = String.valueOf(b);
-            if(numberPattern.matcher(tempA).matches()){
+            // String tempB = String.valueOf(b);
+            if (numberPattern.matcher(tempA).matches()) {
                 return false;
             }
         }
 
-    
         Environment env = new Environment() {
 
             public double value(String value) {
@@ -264,17 +263,14 @@ public class Sheet implements Environment, Cell {
     }
 
     // ----- Inlagd av erik för att arbeta med ClearAll
-    public boolean resetMapReferences() {
-        boolean flag = false;
+    public void resetMapReferences() {
         cells.clear();
 
         if (cells.size() == 0) {
-            flag = true;
             System.out.println("I sheet.java har Map.Referenser tömts");
         } else {
             System.out.println("I sheet.java har Map.Referenser inte tömts");
         }
-        return flag;
     }
 
     public boolean clearOneCell(String str) {
