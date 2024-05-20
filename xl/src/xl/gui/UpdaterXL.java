@@ -18,7 +18,6 @@ public class UpdaterXL {
 
     public UpdaterXL() {
         sheet = new Sheet();
-        
     }
 
     // __________________________________________Addderade attribut
@@ -44,10 +43,11 @@ public class UpdaterXL {
         return cr;
     }
 
-    public void setDefaultClicked(SlotLabel q){
+    public void setDefaultClicked(SlotLabel q) {
         lastClicked = q;
         lastClicked.setBackground(Color.YELLOW);
     }
+
     public void setLastClicked(SlotLabel q) {
         if (lastClicked != null) {
             lastClicked.setBackground(Color.WHITE);
@@ -57,7 +57,7 @@ public class UpdaterXL {
         q.setBackground(Color.YELLOW);
     }
 
-    public SlotLabel getLastClicked(){
+    public SlotLabel getLastClicked() {
         return lastClicked;
     }
 
@@ -70,8 +70,15 @@ public class UpdaterXL {
         status.StatusUpdate("Insättning ok!");
     }
 
+    // ----- Reset/ clear metoder -----
     public void resetUpdaterXL() {
-        sheet = new Sheet();
+        sheet.resetMapReferences();
     }
+
+    public boolean ClearOneCell() {
+        return sheet.clearOneCell(lastClicked.getName());
+    }
+
+    // ----------
 
 }
