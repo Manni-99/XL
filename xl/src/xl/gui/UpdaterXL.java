@@ -57,6 +57,10 @@ public class UpdaterXL {
         q.setBackground(Color.YELLOW);
     }
 
+    public SlotLabel getLastClicked(){
+        return lastClicked;
+    }
+
     public void setSlotInputFromEditor(String s) {
         // editor.getText()
         lastClicked.setText(s);
