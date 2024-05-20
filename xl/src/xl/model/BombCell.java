@@ -20,31 +20,32 @@ public class BombCell implements Cell {
         this.parser = new ExprParser();
 
     }
+
     public BombCell(Object content, List<String> dependentRef ){
         this.content = content;
         this.dependentRef = new ArrayList<>(dependentRef); // Copy constructor for ArrayList
         this.parser = new ExprParser();
     }
 
-            public Object buildBombCell(Object content) {
-            String s = (String) content;
-            Pattern commentPattern = Pattern.compile("[!,#]");
-            Pattern exprPattern = Pattern.compile("[0-9]");
-            Pattern stringPattern = Pattern.compile("[a-z,A-Z]");
-            Matcher matcher;
-            boolean matches;
+    public Object buildBombCell(Object content) {
+    String s = (String) content;
+    Pattern commentPattern = Pattern.compile("[!,#]");
+    Pattern exprPattern = Pattern.compile("[0-9]");
+    Pattern stringPattern = Pattern.compile("[a-z,A-Z]");
+    Matcher matcher;
+    boolean matches;
 
-            try{
-                if(commentPattern.matcher(s).matches()){
-                    return new CommentCell((String) content);
-                }
-                if(exprPattern.matcher(s).matches()) {
-                    return new ExpCell((Expr) content);
-                }
-            } catch (Exception e) {
-                throw new IllegalArgumentException("Unsupported content type: " + content.getClass());
-            }
-            return new CommentCell("#ERROR");
+    try{
+        if(commentPattern.matcher(s).matches()){
+            return new CommentCell((String) content);
+        }
+        if(exprPattern.matcher(s).matches()) {
+            return new ExpCell((Expr) content);
+        }
+    } catch (Exception e) {
+        throw new IllegalArgumentException("Unsupported content type: " + content.getClass());
+    }
+    return new CommentCell("#ERROR");
     }
 
     
