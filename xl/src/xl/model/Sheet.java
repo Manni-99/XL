@@ -37,10 +37,10 @@ public class Sheet implements Environment, Cell {
         //ovan bytt mot denna
         if(cellRefPattern.matcher(ref).matches()){
             char a = ref.charAt(0);
-            char b = ref.charAt(1);
+           // char b = ref.charAt(1);
             System.out.println(a);
             String tempA = String.valueOf(a);
-            String tempB = String.valueOf(b);
+           // String tempB = String.valueOf(b);
             if(numberPattern.matcher(tempA).matches()){
                 return false;
             }
