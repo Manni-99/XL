@@ -17,10 +17,12 @@ public class UpdaterXL {
     private Sheet sheet;
 
     public UpdaterXL() {
-        sheet = new Sheet();
+        this.sheet = new Sheet();
         
     }
-
+    public Sheet getSheet(){
+        return sheet;
+    }
     // __________________________________________Addderade attribut
     public void addEditor(Editor editor) {
         this.editor = editor;

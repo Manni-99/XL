@@ -10,18 +10,16 @@ import java.awt.event.ActionListener;
 
 public class Editor extends JTextField implements ActionListener{
     UpdaterXL ms;
-    Sheet sheet;
-    public Editor(UpdaterXL ms, Sheet sheet) {
+    public Editor(UpdaterXL ms) {
         setBackground(Color.WHITE);
         addActionListener(this);
         this.ms = ms;
-        this.sheet = sheet;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         String currentTextInEditor = getText();
-        //if(sheet.add(ms.getLastClicked().getName(), currentTextInEditor)){
+        //if(ms.getSheet().add(ms.getLastClicked().getName(), currentTextInEditor)){
             ms.setSlotInputFromEditor(currentTextInEditor);
             
         //}
