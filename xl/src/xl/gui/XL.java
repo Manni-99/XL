@@ -25,15 +25,24 @@ public class XL extends JFrame {
         this.counter = counter;
         xlList.add(this);
         counter.increment();
+
+        // ----- insatt av gruppen -----
         UpdaterXL ms = new UpdaterXL();
+
+        // -----
+
         JPanel statusPanel = new StatusPanel(statusLabel, ms);
         JPanel sheetPanel = new SheetPanel(ROWS, COLUMNS, ms);
+
+        // ----- insatt av gruppen ------
         Editor editor = new Editor(ms);
         ms.addEditor(editor);
+        // -----
+
         add(NORTH, statusPanel);
         add(CENTER, editor);
         add(SOUTH, sheetPanel);
-        setJMenuBar(new XLMenuBar(this, xlList, statusLabel, ms));
+        setJMenuBar(new XLMenuBar(this, xlList, statusLabel, ms, (SheetPanel) sheetPanel));
         pack();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
