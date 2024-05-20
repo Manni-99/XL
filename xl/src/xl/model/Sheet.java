@@ -7,6 +7,7 @@ import java.io.*;
 import xl.model.expr.Environment;
 import xl.model.expr.Expr;
 import xl.model.expr.ExprParser;
+import xl.util.XLException;
 
 //matcher
 import java.util.regex.Matcher;
@@ -20,7 +21,7 @@ public class Sheet implements Environment, Cell {
         this.checker = new ExprParser();
     }
 
-    public boolean add(String ref, String value) {
+    public boolean add(String ref, String value) throws XLException {  
         // matcher
         Pattern alphPattern = Pattern.compile("[a-z, A-Z]");
         Pattern numberPattern = Pattern.compile("[0-9]");
@@ -46,7 +47,7 @@ public class Sheet implements Environment, Cell {
             }
         }
 
-        Environment env = new Environment() {
+         Environment env = new Environment() {
 
             public double value(String value) {
                 // Check if the value is a variable name or a literal value
@@ -82,6 +83,7 @@ public class Sheet implements Environment, Cell {
             if (!isVariable(value)) { // If the value is a number or a comment
 
                 expr = checker.build(value); // Here we can build multiple values
+                
                 System.out.println(expr.toString());
 
             } else {
@@ -107,16 +109,21 @@ public class Sheet implements Environment, Cell {
 
         // Step 4: Evaluate the expression to ensure it's valid and handle division by
         // zero cases
-
-        double result = cells.get(ref).value(env);
-        System.out.println(result);
-        Set<String> visited = new HashSet<>();
-        if (hasCircularReference(ref, visited) || Double.isInfinite(result) || Double.isNaN(result)) {
+        
+        try {
+            double result = cells.get(ref).value(env);
+       
+         }catch (XLException e) {
             cells.put(ref, oldCell);
-            return false; // Circular reference detected or division by zero or other invalid result,
-                          // abort
+            //e.printStackTrace();
+            return false;
         }
 
+        Set<String> visited = new HashSet<>();
+        if (hasCircularReference(ref, visited)){
+            cells.put(ref, oldCell);
+            return false;
+        }
         // Step 5: Insert the cell
         // System.out.println(isVariable(value));
         // System.out.println(value);
@@ -134,7 +141,7 @@ public class Sheet implements Environment, Cell {
         for (String cellRef : cells.keySet()) {
             if (cells.get(cellRef) instanceof ExpCell) {
                 System.out.println(cells.get(cellRef).value(env));
-                result = cells.get(cellRef).value(env);
+               double result = cells.get(cellRef).value(env);
                 visited.clear();
 
                 // Check for circular references
@@ -219,7 +226,6 @@ public class Sheet implements Environment, Cell {
 
     public void clearAll() {
         cells.clear();
-
     }
 
     @Override
@@ -229,7 +235,7 @@ public class Sheet implements Environment, Cell {
                 return reference.getValue().toString();
             }
         }
-        return null;
+        return "";
     }
 
     @Override
