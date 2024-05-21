@@ -13,7 +13,7 @@ import xl.util.XLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Sheet implements Environment, Cell {
+public class Sheet implements Environment {
     private Map<String, Cell> cells = new HashMap<>();
     private ExprParser checker;
 
@@ -21,7 +21,7 @@ public class Sheet implements Environment, Cell {
         this.checker = new ExprParser();
     }
 
-    public boolean add(String ref, String value) throws XLException {  
+    public boolean add(String ref, String value) throws XLException {
         // matcher
         Pattern alphPattern = Pattern.compile("[a-z, A-Z]");
         Pattern numberPattern = Pattern.compile("[0-9]");
@@ -47,7 +47,7 @@ public class Sheet implements Environment, Cell {
             }
         }
 
-         Environment env = new Environment() {
+        Environment env = new Environment() {
 
             public double value(String value) {
                 // Check if the value is a variable name or a literal value
@@ -83,7 +83,7 @@ public class Sheet implements Environment, Cell {
             if (!isVariable(value)) { // If the value is a number or a comment
 
                 expr = checker.build(value); // Here we can build multiple values
-                
+
                 System.out.println(expr.value(env));
 
             } else {
@@ -109,18 +109,18 @@ public class Sheet implements Environment, Cell {
 
         // Step 4: Evaluate the expression to ensure it's valid and handle division by
         // zero cases
-        
+
         try {
             double result = cells.get(ref).value(env);
-       
-         }catch (XLException e) {
+
+        } catch (XLException e) {
             cells.put(ref, oldCell);
-            //e.printStackTrace();
+            // e.printStackTrace();
             return false;
         }
 
         Set<String> visited = new HashSet<>();
-        if (hasCircularReference(ref, visited)){
+        if (hasCircularReference(ref, visited)) {
             cells.put(ref, oldCell);
             return false;
         }
@@ -141,7 +141,7 @@ public class Sheet implements Environment, Cell {
         for (String cellRef : cells.keySet()) {
             if (cells.get(cellRef) instanceof ExpCell) {
                 System.out.println(cells.get(cellRef).value(env));
-               double result = cells.get(cellRef).value(env);
+                double result = cells.get(cellRef).value(env);
                 visited.clear();
 
                 // Check for circular references
@@ -228,43 +228,33 @@ public class Sheet implements Environment, Cell {
         cells.clear();
     }
 
-    @Override
-    public <E> String display(E ref) {
-        for (var reference : cells.entrySet()) {
-            if (ref.equals(reference.getKey())) {
-                return reference.getValue().toString();
-            }
+    public String display(String ref) {
+        if (cells.containsKey(ref)) {
+            return cells.get(ref).display(this);
         }
         return "";
     }
 
-    @Override
-    public <E> String formula(E e) {
-        return null;
-    }
-
-    @Override // Cell implementation
-    public <E> double value(E ref) {
-        // return cells.get(ref).value(ref);
-        return 0.0;
+    public String formula(String ref) {
+        if (cells.containsKey(ref)) {
+            return cells.get(ref).formula();
+        }
+        return "";
     }
 
     @Override // Environment implementation
     public double value(String name) {
-        try {
-            Expr ex = checker.build(name);
-            return value(ex);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (cells.containsKey(name)) {
+            return cells.get(name).value(this);
         }
         return 0.0;
     }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        
+
         for (Map.Entry<String, Cell> entry : cells.entrySet()) {
-            sb.append(entry.getKey()).append(": ").append(entry.getValue().display(null)).append("\n");
+            sb.append(entry.getKey()).append(": ").append(entry.getValue().display(this)).append("\n");
         }
         return sb.toString();
     }
