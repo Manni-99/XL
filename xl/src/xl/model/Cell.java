@@ -1,11 +1,11 @@
 package xl.model;
-    public interface Cell{
-        public <E> String display(E e);
 
-        public <E> String formula(E e);
+import xl.model.expr.Environment;
 
-        public <E> double value(E e);
-    }
+public interface Cell {
+    public String display(Environment e);
 
+    public String formula();
 
-
+    public double value(Environment e);
+}

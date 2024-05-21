@@ -11,31 +11,28 @@ public class ExpCell implements Cell {
     }
 
     @Override
-    public String display(Object o) {
+    public String display(Environment e) {
         // Return the string representation of the expression
-        return expression.toString();
+        double val = value(e);
+        String dis = val + "";
+        return dis;
     }
 
     @Override
-    public String formula(Object o) {
+    public String formula() {
         // Return the formula representation of the expression
         return expression.toString();
     }
 
     @Override
-    public double value(Object o) {
+    public double value(Environment e) {
         // Evaluate the expression using the provided environment
-        if (o instanceof Environment) {
-            Environment env = (Environment) o;
-            return expression.value(env);
-        } else {
-            throw new IllegalArgumentException("Environment object required for value calculation");
-        }
+        return expression.value(e);
     }
 
     @Override
     public String toString() {
         return "" + expression + "";
-}
+    }
 
 }
