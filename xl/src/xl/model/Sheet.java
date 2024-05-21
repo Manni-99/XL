@@ -23,7 +23,7 @@ public class Sheet implements Environment {
 
     public boolean add(String ref, String value) throws XLException {
         // matcher
-        Pattern alphPattern = Pattern.compile("[a-z, A-Z]");
+        Pattern alphPattern = Pattern.compile("[a-z,A-Z]+");
         Pattern numberPattern = Pattern.compile("[0-9]");
         Pattern cellRefPattern = Pattern.compile("[a-z,A-Z,0-9]");
         Matcher matcher;
@@ -76,7 +76,13 @@ public class Sheet implements Environment {
                 }
             }
         };
-
+        Set<String> visited = new HashSet<>();
+        // Step 2: Save the old cell
+        Cell oldCell = cells.get(ref);
+        if(value.startsWith("#")){
+            cells.put(ref, new CommentCell(value.substring(1)));
+        } else {
+        
         // Step 1: Parse the expression and check for circular reference
         Expr expr = null; // Figure out why expr is always null
         try {
@@ -84,14 +90,21 @@ public class Sheet implements Environment {
 
                 expr = checker.build(value); // Here we can build multiple values
 
-                System.out.println(expr.value(env));
+               // System.out.println(expr.value(env));
 
             } else {
                 String variableKey = value.substring(1);
                 System.out.println(variableKey);
                 // System.out.println(cells.get(variableKey).value(this));
                 if (cells.containsKey(variableKey)) {
-                    expr = checker.build(cells.get(variableKey).display(this));
+                   // System.out.println(cells.get(variableKey).display(this));
+                    matcher = alphPattern.matcher(cells.get(variableKey).display(this));
+                    if(matcher.find()){
+                        cells.put(ref, new CommentCell(cells.get(variableKey).display(this)));
+                        return true;
+                    } else{
+                     expr = checker.build(cells.get(variableKey).display(this));
+                    }
                 } else {
                     return false;
                 }
@@ -101,17 +114,18 @@ public class Sheet implements Environment {
 
         }
 
-        // Step 2: Save the old cell
-        Cell oldCell = cells.get(ref);
+        
+       
 
+        
         // Step 3: Add the "bomb cell"
-        cells.put(ref, new BombCell(expr));
+        cells.put(ref, new ExpCell(expr));
 
         // Step 4: Evaluate the expression to ensure it's valid and handle division by
         // zero cases
 
         try {
-            double result = cells.get(ref).value(env);
+            double result =  cells.get(ref).value(env);
 
         } catch (XLException e) {
             cells.put(ref, oldCell);
@@ -119,7 +133,7 @@ public class Sheet implements Environment {
             return false;
         }
 
-        Set<String> visited = new HashSet<>();
+        
         if (hasCircularReference(ref, visited)) {
             cells.put(ref, oldCell);
             return false;
@@ -137,6 +151,7 @@ public class Sheet implements Environment {
         }
         cells.put(ref, newCell);
         System.out.println(cells.get(ref));
+        }
         // Step 6: Recalculate all cells with a value (optional)
         for (String cellRef : cells.keySet()) {
             if (cells.get(cellRef) instanceof ExpCell) {
