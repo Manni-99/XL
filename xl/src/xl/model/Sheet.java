@@ -16,38 +16,11 @@ import java.util.regex.Pattern;
 public class Sheet implements Environment {
     private Map<String, Cell> cells = new HashMap<>();
     private ExprParser checker;
+    private Environment env;
 
     public Sheet() {
         this.checker = new ExprParser();
-    }
-
-    public boolean add(String ref, String value) throws XLException {
-        // matcher
-        Pattern alphPattern = Pattern.compile("[a-z,A-Z]+");
-        Pattern numberPattern = Pattern.compile("[0-9]");
-        Pattern cellRefPattern = Pattern.compile("[a-z,A-Z,0-9]");
-        Matcher matcher;
-        boolean matches;
-
-        /*
-         * if (ref.matches("^\\d.*")) {
-         * return false;
-         * // Base case, if a reference begins with a number, return false;
-         * }
-         */
-        // ovan bytt mot denna
-        if (cellRefPattern.matcher(ref).matches()) {
-            char a = ref.charAt(0);
-            // char b = ref.charAt(1);
-            System.out.println(a);
-            String tempA = String.valueOf(a);
-            // String tempB = String.valueOf(b);
-            if (numberPattern.matcher(tempA).matches()) {
-                return false;
-            }
-        }
-
-        Environment env = new Environment() {
+        this.env = new Environment() {
 
             public double value(String value) {
                 // Check if the value is a variable name or a literal value
@@ -76,9 +49,42 @@ public class Sheet implements Environment {
                 }
             }
         };
+    }
+
+    public boolean add(String ref, String value) throws XLException {
+        // matcher
+        Pattern alphPattern = Pattern.compile("[a-z,A-Z]+");
+        Pattern numberPattern = Pattern.compile("[0-9]");
+        Pattern cellRefPattern = Pattern.compile("[a-z,A-Z,0-9]");
+        Matcher matcher;
+        boolean matches;
+
+        /*
+         * if (ref.matches("^\\d.*")) {
+         * return false;
+         * // Base case, if a reference begins with a number, return false;
+         * }
+         */
+        // ovan bytt mot denna
+        if (cellRefPattern.matcher(ref).matches()) {
+            char a = ref.charAt(0);
+            // char b = ref.charAt(1);
+           // System.out.println(a);
+            String tempA = String.valueOf(a);
+            // String tempB = String.valueOf(b);
+            if (numberPattern.matcher(tempA).matches()) {
+                return false;
+            }
+        }
+
+         
         Set<String> visited = new HashSet<>();
         // Step 2: Save the old cell
-        Cell oldCell = cells.get(ref);
+        Cell oldCell = new CommentCell("");
+        if(cells.get(ref) != null){
+             oldCell = cells.get(ref);
+        } 
+        
         if(value.startsWith("#")){
             cells.put(ref, new CommentCell(value.substring(1)));
         } else {
@@ -94,13 +100,14 @@ public class Sheet implements Environment {
 
             } else {
                 String variableKey = value.substring(1);
-                System.out.println(variableKey);
+               // System.out.println(variableKey);
                 // System.out.println(cells.get(variableKey).value(this));
                 if (cells.containsKey(variableKey)) {
                    // System.out.println(cells.get(variableKey).display(this));
                     matcher = alphPattern.matcher(cells.get(variableKey).display(this));
                     if(matcher.find()){
                         cells.put(ref, new CommentCell(cells.get(variableKey).display(this)));
+
                         return true;
                     } else{
                      expr = checker.build(cells.get(variableKey).display(this));
@@ -113,10 +120,6 @@ public class Sheet implements Environment {
             e.printStackTrace();
 
         }
-
-        
-       
-
         
         // Step 3: Add the "bomb cell"
         cells.put(ref, new ExpCell(expr));
@@ -150,12 +153,12 @@ public class Sheet implements Environment {
             newCell = new CommentCell(value); // Assuming value is the comment text
         }
         cells.put(ref, newCell);
-        System.out.println(cells.get(ref));
+     //   System.out.println(cells.get(ref));
         }
         // Step 6: Recalculate all cells with a value (optional)
         for (String cellRef : cells.keySet()) {
             if (cells.get(cellRef) instanceof ExpCell) {
-                System.out.println(cells.get(cellRef).value(env));
+              //  System.out.println(cells.get(cellRef).value(env));
                 double result = cells.get(cellRef).value(env);
                 visited.clear();
 
@@ -177,27 +180,26 @@ public class Sheet implements Environment {
     }
 
     private boolean hasCircularReference(String ref, Set<String> visited) {
-        System.out.println("Begining of hasCircularReference recursive method");
+       // System.out.println("Begining of hasCircularReference recursive method");
         if (visited.contains(ref)) {
             return true;
         }
         visited.add(ref);
-        System.out.println("Before the if case of CommentCell");
+      //  System.out.println("Before the if case of CommentCell");
         Cell cell = cells.get(ref);
-        System.out.println(cell);
-        if (cell != null && cell instanceof BombCell) {
+      //  System.out.println(cell);
+        if (cell instanceof BombCell) {
             BombCell bombCell = (BombCell) cell;
-            System.out.println("Before the for loop of CommentCell");
+           // System.out.println("Before the for loop of CommentCell");
 
             for (String dependentRef : bombCell.getDependantRef()) {
-                System.out.println(
-                        dependentRef + " " + "This is the for loop x" + bombCell.getDependantRef().toString());
+                //System.out.println(dependentRef + " " + "This is the for loop x" + bombCell.getDependantRef().toString());
                 if (hasCircularReference(dependentRef, visited)) {
                     return true;
                 }
             }
         }
-        System.out.println("End of hasCircularReference recursive method");
+     //   System.out.println("End of hasCircularReference recursive method");
         visited.remove(ref);
         return false;
     }
@@ -206,6 +208,8 @@ public class Sheet implements Environment {
         return name.startsWith("=");
     }
 
+    
+    
     public String load(InputStream filePath) throws IOException {
         StringBuilder sb = new StringBuilder();
         try (BufferedReader br = new BufferedReader(new InputStreamReader(filePath))) {
@@ -233,10 +237,10 @@ public class Sheet implements Environment {
         for (var c : cells.entrySet()) {
             if (c.getKey().equals(cell)) {
                 cells.remove(cell);
-                System.out.println(cell + " Has been removed"); // Test prints
+         //       System.out.println(cell + " Has been removed"); // Test prints
             }
         }
-        System.out.println("Nothing has been removed");// Test prints
+       // System.out.println("Nothing has been removed");// Test prints
     }
 
     public void clearAll() {
@@ -269,7 +273,7 @@ public class Sheet implements Environment {
         StringBuilder sb = new StringBuilder();
 
         for (Map.Entry<String, Cell> entry : cells.entrySet()) {
-            sb.append(entry.getKey()).append(": ").append(entry.getValue().display(this)).append("\n");
+            sb.append(entry.getKey()).append(": ").append(entry.getValue().display(env)).append("\n");
         }
         return sb.toString();
     }
