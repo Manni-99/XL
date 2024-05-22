@@ -14,8 +14,9 @@ public class ExpCell implements Cell {
     public String display(Environment e) {
         // Return the string representation of the expression
         double val = value(e);
-        String dis = val + "";
-        return dis;
+        System.out.println(val);
+       // String dis = val + "";
+        return String.valueOf(val);
     }
 
     @Override
