@@ -15,11 +15,11 @@ import java.util.regex.Pattern;
 
 public class Sheet implements Environment {
     private Map<String, Cell> cells = new HashMap<>();
-    private ExprParser checker;
+    private ExprParser parser;
     private Environment env;
 
     public Sheet() {
-        this.checker = new ExprParser();
+        this.parser = new ExprParser();
         this.env = new Environment() {
 
             public double value(String value) {
@@ -51,165 +51,48 @@ public class Sheet implements Environment {
         };
     }
 
-    public boolean add(String ref, String value) throws XLException {
-        // matcher
-        Pattern alphPattern = Pattern.compile("[a-z,A-Z]+");
-        Pattern numberPattern = Pattern.compile("[0-9]");
-        Pattern cellRefPattern = Pattern.compile("[a-z,A-Z,0-9]");
-        Matcher matcher;
-        boolean matches;
-
-        /*
-         * if (ref.matches("^\\d.*")) {
-         * return false;
-         * // Base case, if a reference begins with a number, return false;
-         * }
-         */
-        // ovan bytt mot denna
-        if (cellRefPattern.matcher(ref).matches()) {
-            char a = ref.charAt(0);
-            // char b = ref.charAt(1);
-           // System.out.println(a);
-            String tempA = String.valueOf(a);
-            // String tempB = String.valueOf(b);
-            if (numberPattern.matcher(tempA).matches()) {
-                return false;
-            }
+    public boolean add(String ref, String value) {
+        if (ref == null) {
+            return false;
         }
-
-         
-        Set<String> visited = new HashSet<>();
-        // Step 2: Save the old cell
-        Cell oldCell = new CommentCell("");
-        if(cells.get(ref) != null){
-             oldCell = cells.get(ref);
-        } 
-        
-        if(value.startsWith("#")){
+        Cell oldCell = cells.get(ref);
+        Expr expr;
+        if (ref.startsWith("#")) {
             cells.put(ref, new CommentCell(value.substring(1)));
         } else {
-        
-        // Step 1: Parse the expression and check for circular reference
-        Expr expr = null; // Figure out why expr is always null
-        try {
-            if (!isVariable(value)) { // If the value is a number or a comment
-
-                expr = checker.build(value); // Here we can build multiple values
-
-               // System.out.println(expr.value(env));
-
-            } else {
-                String variableKey = value.substring(1);
-               // System.out.println(variableKey);
-                // System.out.println(cells.get(variableKey).value(this));
-                if (cells.containsKey(variableKey)) {
-                   // System.out.println(cells.get(variableKey).display(this));
-                    matcher = alphPattern.matcher(cells.get(variableKey).display(this));
-                    if(matcher.find()){
-                        cells.put(ref, new CommentCell(cells.get(variableKey).display(this)));
-
-                        return true;
-                    } else{
-                     expr = checker.build(cells.get(variableKey).display(this));
-                    }
+            cells.put(ref, new BombCell(value));
+            try {
+                expr = parser.build(value); // Går det att parsa value? Annars exception
+                expr.value(this); // Går det att beräkna expr? Annars exception
+            } catch (IOException e) {
+                if (oldCell != null) {
+                    cells.put(ref, oldCell);
                 } else {
-                    return false;
+                    cells.remove(ref);
                 }
+                return false;
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-
+            cells.put(ref, new ExpCell(expr));
         }
-        
-        // Step 3: Add the "bomb cell"
-        cells.put(ref, new ExpCell(expr));
-
-        // Step 4: Evaluate the expression to ensure it's valid and handle division by
-        // zero cases
-
         try {
-            double result =  cells.get(ref).value(env);
-
-        } catch (XLException e) {
-            cells.put(ref, oldCell);
-            // e.printStackTrace();
-            return false;
-        }
-
-        
-        if (hasCircularReference(ref, visited)) {
-            cells.put(ref, oldCell);
-            return false;
-        }
-        // Step 5: Insert the cell
-        // System.out.println(isVariable(value));
-        // System.out.println(value);
-        Cell newCell;
-        if (isVariable(value)) {
-            newCell = new ExpCell(expr);
-            System.out.println(newCell.toString());
-
-        } else {
-            newCell = new CommentCell(value); // Assuming value is the comment text
-        }
-        cells.put(ref, newCell);
-     //   System.out.println(cells.get(ref));
-        }
-        // Step 6: Recalculate all cells with a value (optional)
-        for (String cellRef : cells.keySet()) {
-            if (cells.get(cellRef) instanceof ExpCell) {
-              //  System.out.println(cells.get(cellRef).value(env));
-                double result = cells.get(cellRef).value(env);
-                visited.clear();
-
-                // Check for circular references
-                if (hasCircularReference(cellRef, visited)) {
-                    cells.put(ref, oldCell);
-                    throw new IllegalArgumentException("Circular reference detected");
-                }
-
-                // Check for division by zero
-                if (Double.isInfinite(result) || Double.isNaN(result)) {
-                    cells.put(ref, oldCell);
-                    throw new ArithmeticException("Division by zero");
-                }
-
+            for (Cell c : cells.values()) {
+                c.value(this);
             }
-        }
-        return true;
-    }
-
-    private boolean hasCircularReference(String ref, Set<String> visited) {
-       // System.out.println("Begining of hasCircularReference recursive method");
-        if (visited.contains(ref)) {
             return true;
-        }
-        visited.add(ref);
-      //  System.out.println("Before the if case of CommentCell");
-        Cell cell = cells.get(ref);
-      //  System.out.println(cell);
-        if (cell instanceof BombCell) {
-            BombCell bombCell = (BombCell) cell;
-           // System.out.println("Before the for loop of CommentCell");
-
-            for (String dependentRef : bombCell.getDependantRef()) {
-                //System.out.println(dependentRef + " " + "This is the for loop x" + bombCell.getDependantRef().toString());
-                if (hasCircularReference(dependentRef, visited)) {
-                    return true;
-                }
+        } catch (XLException e) {
+            if (oldCell != null) {
+                cells.put(ref, oldCell);
+            } else {
+                cells.remove(ref);
             }
+            return false;
         }
-     //   System.out.println("End of hasCircularReference recursive method");
-        visited.remove(ref);
-        return false;
     }
 
     private boolean isVariable(String name) {
         return name.startsWith("=");
     }
 
-    
-    
     public String load(InputStream filePath) throws IOException {
         StringBuilder sb = new StringBuilder();
         try (BufferedReader br = new BufferedReader(new InputStreamReader(filePath))) {
@@ -237,10 +120,10 @@ public class Sheet implements Environment {
         for (var c : cells.entrySet()) {
             if (c.getKey().equals(cell)) {
                 cells.remove(cell);
-         //       System.out.println(cell + " Has been removed"); // Test prints
+                // System.out.println(cell + " Has been removed"); // Test prints
             }
         }
-       // System.out.println("Nothing has been removed");// Test prints
+        // System.out.println("Nothing has been removed");// Test prints
     }
 
     public void clearAll() {
@@ -271,9 +154,9 @@ public class Sheet implements Environment {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-
         for (Map.Entry<String, Cell> entry : cells.entrySet()) {
-            sb.append(entry.getKey()).append(": ").append(entry.getValue().display(env)).append("\n");
+            sb.append(entry.getKey()).append(": ").append(entry.getValue().display(this)).append("\n");
+            System.out.println(entry.getKey());
         }
         return sb.toString();
     }
@@ -289,12 +172,12 @@ public class Sheet implements Environment {
         }
     }
 
-    public boolean clearOneCell(String str) {
+   /*  public boolean clearOneCell(String str) {
         boolean kanRensa;
 
         kanRensa = add(str, null);
 
         return kanRensa;
-    }
+    }*/
 
 }
