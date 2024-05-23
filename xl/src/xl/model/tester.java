@@ -12,14 +12,15 @@ public class tester {
 
         Sheet xl = new Sheet();
 
-        xl.add("A2", "3");
-        xl.add("A2", "24/2");
+        xl.add("A2", "A2");
+        xl.add("A2", "A2");
         xl.add("A4", "100");
-        xl.add("A5", "A2");
-        xl.add("A6", "12/1");
+        xl.add("A5", "A2/0");
+        xl.add("A6", "#HelloWorld");
         xl.add("A7", "A4");
         xl.add("A7", "B4");
-
+            //Division med noll
+            //Ref tilldelning som ej existerar blir till 0.0 vilket borde inte hända
         System.out.println(xl.toString());
         // System.out.println(xl.display("A7") + " Ska skriva ut vad A1 innehåller");
 
