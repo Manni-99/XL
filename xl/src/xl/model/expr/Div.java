@@ -11,8 +11,11 @@ class Div extends BinaryExpr {
     }
 
     public double op(double op1, double op2) {
-        if (op2 != 0) return op1 / op2;
-        else throw new XLException("division by zero");
+        if (op2 != 0) {
+            return op1 / op2;
+        } else {
+            throw new XLException("division by zero");
+        }
     }
 
     protected String opString() {

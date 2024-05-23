@@ -16,11 +16,12 @@ public class tester {
         xl.add("A2", "24/2");
         xl.add("A4", "100");
         xl.add("A5", "A2");
-        xl.add("A6", "12/0");
+        xl.add("A6", "12/1");
         xl.add("A7", "A4");
         xl.add("A7", "B4");
 
         System.out.println(xl.toString());
+        // System.out.println(xl.display("A7") + " Ska skriva ut vad A1 innehåller");
 
         // när add är klar, ta bort kommentarer i clear
     }
