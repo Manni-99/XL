@@ -30,18 +30,11 @@ public class Editor extends JTextField implements ActionListener {
                 ms.resetSlots(slot);
                 ms.setSlotInputFromEditor(ms.getSheet().display(slot.getName()));
                 slot.setBackground(Color.WHITE);
-                // System.out.println("slot: " + slot + " input to display: " + slot.getName()
-                // + " To setSlotInputFromEditor: " + ms.getSheet().display(slot.toString()));
             }
 
         } else {
             ms.updateStatus();
         }
 
-        if (getText().equals("Error")) {
-            ms.getStatusLabel().setText("Error");
-        } else {
-            ms.getStatusLabel().setText(" ");
-        }
     }
 }

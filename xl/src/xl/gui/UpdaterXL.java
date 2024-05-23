@@ -80,11 +80,13 @@ public class UpdaterXL {
         return status;
     }
 
+    // ##############################################
     public void updateStatus() {
-        System.err.println(sheet.getError());
+        System.out.println(sheet.getError() + " i UpdaterXL");
         String error = sheet.getError();
-        status.setText(error);
+        this.status.setText(error + " ny status!");
     }
+    // ##############################################
 
     // ----- Reset/ clear metoder -----
     public void resetUpdaterXL() {

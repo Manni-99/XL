@@ -17,7 +17,7 @@ public class Sheet implements Environment {
     private Map<String, Cell> cells = new HashMap<>();
     private ExprParser parser;
     private Environment env;
-    private String errorMeddelande = "";
+    public String errorMeddelande = "";
 
     public Sheet() {
         this.parser = new ExprParser();
@@ -93,7 +93,7 @@ public class Sheet implements Environment {
             }
             return true;
         } catch (Exception e) {
-            System.out.println("ovan error insättning");
+            System.out.println("ovan error cirkulär insättning");
             this.errorMeddelande = "Cirkulär error";
             if (oldCell != null) {
                 cells.put(ref, oldCell);
