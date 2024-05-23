@@ -17,75 +17,84 @@ public class Sheet implements Environment {
     private Map<String, Cell> cells = new HashMap<>();
     private ExprParser parser;
     private Environment env;
+    private String errorMeddelande = "";
 
     public Sheet() {
         this.parser = new ExprParser();
-    /*     this.env = new Environment() {
-
-            public double value(String value) {
-                // Check if the value is a variable name or a literal value
-                if (isVariable(value)) {
-                    // If it's a variable name, look up its value in the cells map
-                    String variableKey = value.substring(1);
-                    System.out.println(variableKey);
-                    System.out.println(cells.get(variableKey).value(this));
-                    if (cells.containsKey(variableKey)) {
-                        // If the variable exists in the cells map, return its value
-                        return cells.get(variableKey).value(this);
-                    } else {
-                        // If the variable doesn't exist, handle it accordingly (e.g., throw an
-                        // exception)
-                        // We will return null or 0.0
-                        return 0.0;
-                    }
-                } else {
-                    // If it's a literal value, parse it and return it directly
-                    try {
-                        return Double.parseDouble(value);
-                    } catch (NumberFormatException e) {
-                        // Handle the case where the value cannot be parsed to a double
-                        throw new IllegalArgumentException("Invalid literal value: " + value); // Tomt
-                    }
-                }
-            }
-        };*/
+        /*
+         * this.env = new Environment() {
+         * 
+         * public double value(String value) {
+         * // Check if the value is a variable name or a literal value
+         * if (isVariable(value)) {
+         * // If it's a variable name, look up its value in the cells map
+         * String variableKey = value.substring(1);
+         * System.out.println(variableKey);
+         * System.out.println(cells.get(variableKey).value(this));
+         * if (cells.containsKey(variableKey)) {
+         * // If the variable exists in the cells map, return its value
+         * return cells.get(variableKey).value(this);
+         * } else {
+         * // If the variable doesn't exist, handle it accordingly (e.g., throw an
+         * // exception)
+         * // We will return null or 0.0
+         * return 0.0;
+         * }
+         * } else {
+         * // If it's a literal value, parse it and return it directly
+         * try {
+         * return Double.parseDouble(value);
+         * } catch (NumberFormatException e) {
+         * // Handle the case where the value cannot be parsed to a double
+         * throw new IllegalArgumentException("Invalid literal value: " + value); //
+         * Tomt
+         * }
+         * }
+         * }
+         * };
+         */
     }
 
     public boolean add(String ref, String value) {
         if (ref == null) {
             return false;
         }
-    
+
         Cell oldCell = cells.get(ref);
         Expr expr;
-        if(value == null || value.equals("")){
-            if(oldCell != null){
+        if (value == null || value.equals("")) {
+            if (oldCell != null) {
                 cells.remove(ref);
             }
         } else {
-        if (value.startsWith("#")) {
-            cells.put(ref, new CommentCell(value.substring(1)));
-        } else {
-            cells.put(ref, new BombCell(value));
-            try {
-                expr = parser.build(value); // Går det att parsa value? Annars exception
-                expr.value(this); // Går det att beräkna expr? Annars exception
-            } catch (Exception e) {
-                if (oldCell != null) {
-                    cells.put(ref, oldCell);
-                } else {
-                    cells.remove(ref);
+            if (value.startsWith("#")) {
+                cells.put(ref, new CommentCell(value.substring(1)));
+            } else {
+                cells.put(ref, new BombCell(value));
+                try {
+                    expr = parser.build(value); // Går det att parsa value? Annars exception
+                    expr.value(this); // Går det att beräkna expr? Annars exception
+                } catch (Exception e) {
+                    System.out.println("ovan error  div insättning");
+                    this.errorMeddelande = "Division med noll";
+                    if (oldCell != null) {
+                        cells.put(ref, oldCell);
+                    } else {
+                        cells.remove(ref);
+                    }
+                    return false;
                 }
-                return false;
+                cells.put(ref, new ExpCell(expr));
             }
-            cells.put(ref, new ExpCell(expr));
-        }}
+        }
         try {
             for (Cell c : cells.values()) {
                 c.value(this);
             }
             return true;
         } catch (Exception e) {
+            System.out.println("ovan error insättning");
+            this.errorMeddelande = "Cirkulär error";
             if (oldCell != null) {
                 cells.put(ref, oldCell);
             } else {
@@ -180,12 +189,16 @@ public class Sheet implements Environment {
         }
     }
 
-     public boolean clearOneCell(String str) {
+    public boolean clearOneCell(String str) {
         boolean kanRensa;
 
         kanRensa = add(str, null);
 
         return kanRensa;
+    }
+
+    public String getError() {
+        return this.errorMeddelande;
     }
 
 }

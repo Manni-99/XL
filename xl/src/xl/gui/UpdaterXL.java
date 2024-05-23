@@ -80,6 +80,12 @@ public class UpdaterXL {
         return status;
     }
 
+    public void updateStatus() {
+        System.err.println(sheet.getError());
+        String error = sheet.getError();
+        status.setText(error);
+    }
+
     // ----- Reset/ clear metoder -----
     public void resetUpdaterXL() {
         sheet.resetMapReferences();

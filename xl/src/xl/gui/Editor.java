@@ -22,9 +22,10 @@ public class Editor extends JTextField implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String currentTextInEditor = getText();
+
         if (ms.getSheet().add(ms.getLastClicked().getName(), currentTextInEditor)) {
             ms.setSlotInputFromEditor(currentTextInEditor);
-
+            ms.StatusTextOk();
             for (SlotLabel slot : sheetPanel.getSlotLabels().getLabels()) {
                 ms.resetSlots(slot);
                 ms.setSlotInputFromEditor(ms.getSheet().display(slot.getName()));
@@ -33,6 +34,8 @@ public class Editor extends JTextField implements ActionListener {
                 // + " To setSlotInputFromEditor: " + ms.getSheet().display(slot.toString()));
             }
 
+        } else {
+            ms.updateStatus();
         }
 
         if (getText().equals("Error")) {
