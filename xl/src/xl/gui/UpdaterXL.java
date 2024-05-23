@@ -54,7 +54,8 @@ public class UpdaterXL {
     }
 
     public void setLastClicked(SlotLabel q) {
-        editor.setText(q.getText().trim());
+        // editor.setText(q.getText().trim());
+        editor.setText(sheet.formula(q.getName()));
         lastClicked.setBackground(Color.WHITE);
 
         clearMenu.addSlotToClear(q);
@@ -90,9 +91,8 @@ public class UpdaterXL {
 
     public boolean ClearOneCell() {
         boolean done = true;
-        if (/* sheet.add(lastClicked.getName(), null) */ sheet.clear(lastClicked.getName())) {
+        if (sheet.add(lastClicked.getName(), null)) {
 
-            sheet.clear(lastClicked.getName())/* add(lastClicked.getName(), null) */;
             System.out.println("En ruta tömd");
             return done;
         }
