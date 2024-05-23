@@ -29,7 +29,7 @@ public class XL extends JFrame {
         this.counter = counter;
         xlList.add(this);
         counter.increment();
-        
+
         // ----- insatt av gruppen -----
         UpdaterXL ms = new UpdaterXL();
         ms.addStatus(statusLabel);
@@ -42,7 +42,7 @@ public class XL extends JFrame {
         // ----- insatt av gruppen ------
         sp = (SheetPanel) sheetPanel;
 
-        Editor editor = new Editor(ms);
+        Editor editor = new Editor(ms, sp);
         ms.addEditor(editor);
         // -----
 

@@ -31,7 +31,7 @@ class ClearAllMenuItem extends JMenuItem implements ActionListener {
 
     public void reset() {
         for (SlotLabel slot : sheetPanel.getSlotLabels().getLabels()) {
-            ms.resetAllSlots(slot);
+            ms.resetSlots(slot);
             ms.setSlotInputFromEditor(null);
             // slot.setText(null);
             slot.ClearColor();

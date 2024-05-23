@@ -22,6 +22,7 @@ public class tester {
             //Division med noll
             //Ref tilldelning som ej existerar blir till 0.0 vilket borde inte hända
         System.out.println(xl.toString());
+        // System.out.println(xl.display("A7") + " Ska skriva ut vad A1 innehåller");
 
         // när add är klar, ta bort kommentarer i clear
     }
