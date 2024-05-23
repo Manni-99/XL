@@ -7,7 +7,7 @@ import java.util.Observer;
 public class StatusLabel extends ColoredLabel implements Observer {
 
     public StatusLabel() {
-        super("status", Color.WHITE);
+        super("error.status label klass", Color.WHITE);
     }
 
     public void StatusUpdate(String str) {

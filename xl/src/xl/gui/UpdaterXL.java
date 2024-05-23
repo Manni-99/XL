@@ -54,7 +54,8 @@ public class UpdaterXL {
     }
 
     public void setLastClicked(SlotLabel q) {
-        editor.setText(q.getText().trim());
+        // editor.setText(q.getText().trim());
+        editor.setText(sheet.formula(q.getName()));
         lastClicked.setBackground(Color.WHITE);
 
         clearMenu.addSlotToClear(q);
