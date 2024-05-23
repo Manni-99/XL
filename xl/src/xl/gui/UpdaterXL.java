@@ -79,6 +79,12 @@ public class UpdaterXL {
         return status;
     }
 
+    public void updateStatus() {
+        System.err.println(sheet.getError());
+        String error = sheet.getError();
+        status.setText(error);
+    }
+
     // ----- Reset/ clear metoder -----
     public void resetUpdaterXL() {
         sheet.resetMapReferences();
@@ -90,9 +96,8 @@ public class UpdaterXL {
 
     public boolean ClearOneCell() {
         boolean done = true;
-        if (/* sheet.add(lastClicked.getName(), null) */ sheet.clear(lastClicked.getName())) {
+        if (sheet.add(lastClicked.getName(), null)) {
 
-            sheet.clear(lastClicked.getName())/* add(lastClicked.getName(), null) */;
             System.out.println("En ruta tömd");
             return done;
         }
