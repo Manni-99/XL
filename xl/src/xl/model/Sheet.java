@@ -116,13 +116,15 @@ public class Sheet implements Environment {
         return false;
     }
 
-    public void clear(String cell) {
+    public boolean clear(String cell) {
         for (var c : cells.entrySet()) {
             if (c.getKey().equals(cell)) {
                 cells.remove(cell);
+                return true;
                 // System.out.println(cell + " Has been removed"); // Test prints
             }
         }
+        return false;
         // System.out.println("Nothing has been removed");// Test prints
     }
 
@@ -172,12 +174,14 @@ public class Sheet implements Environment {
         }
     }
 
-   /*  public boolean clearOneCell(String str) {
-        boolean kanRensa;
-
-        kanRensa = add(str, null);
-
-        return kanRensa;
-    }*/
+    /*
+     * public boolean clearOneCell(String str) {
+     * boolean kanRensa;
+     * 
+     * kanRensa = add(str, null);
+     * 
+     * return kanRensa;
+     * }
+     */
 
 }

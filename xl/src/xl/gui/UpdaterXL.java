@@ -84,12 +84,19 @@ public class UpdaterXL {
         sheet.resetMapReferences();
     }
 
-    public void resetAllSlots(SlotLabel s) {
+    public void resetSlots(SlotLabel s) {
         lastClicked = s;
     }
 
     public boolean ClearOneCell() {
-        return sheet.clearOneCell(lastClicked.getName());
+        boolean done = true;
+        if (/* sheet.add(lastClicked.getName(), null) */ sheet.clear(lastClicked.getName())) {
+
+            sheet.clear(lastClicked.getName())/* add(lastClicked.getName(), null) */;
+            System.out.println("En ruta tömd");
+            return done;
+        }
+        return !done;
     }
 
     // ----------
