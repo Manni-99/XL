@@ -20,7 +20,7 @@ public class Sheet implements Environment {
 
     public Sheet() {
         this.parser = new ExprParser();
-        this.env = new Environment() {
+    /*     this.env = new Environment() {
 
             public double value(String value) {
                 // Check if the value is a variable name or a literal value
@@ -48,23 +48,29 @@ public class Sheet implements Environment {
                     }
                 }
             }
-        };
+        };*/
     }
 
     public boolean add(String ref, String value) {
         if (ref == null) {
             return false;
         }
+    
         Cell oldCell = cells.get(ref);
         Expr expr;
-        if (ref.startsWith("#")) {
+        if(value == null || value.equals("")){
+            if(oldCell != null){
+                cells.remove(ref);
+            }
+        } else {
+        if (value.startsWith("#")) {
             cells.put(ref, new CommentCell(value.substring(1)));
         } else {
             cells.put(ref, new BombCell(value));
             try {
                 expr = parser.build(value); // Går det att parsa value? Annars exception
                 expr.value(this); // Går det att beräkna expr? Annars exception
-            } catch (IOException e) {
+            } catch (Exception e) {
                 if (oldCell != null) {
                     cells.put(ref, oldCell);
                 } else {
@@ -73,13 +79,13 @@ public class Sheet implements Environment {
                 return false;
             }
             cells.put(ref, new ExpCell(expr));
-        }
+        }}
         try {
             for (Cell c : cells.values()) {
                 c.value(this);
             }
             return true;
-        } catch (XLException e) {
+        } catch (Exception e) {
             if (oldCell != null) {
                 cells.put(ref, oldCell);
             } else {
@@ -149,7 +155,7 @@ public class Sheet implements Environment {
         if (cells.containsKey(name)) {
             return cells.get(name).value(this);
         }
-        return 0.0;
+        throw new XLException("Illegal Cell");
     }
 
     public String toString() {
@@ -172,12 +178,12 @@ public class Sheet implements Environment {
         }
     }
 
-   /*  public boolean clearOneCell(String str) {
+     public boolean clearOneCell(String str) {
         boolean kanRensa;
 
         kanRensa = add(str, null);
 
         return kanRensa;
-    }*/
+    }
 
 }
