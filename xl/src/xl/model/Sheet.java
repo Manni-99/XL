@@ -201,4 +201,8 @@ public class Sheet implements Environment {
         return this.errorMeddelande;
     }
 
+    public Map<String, Cell> getCells(){
+        return cells;
+    }
+
 }

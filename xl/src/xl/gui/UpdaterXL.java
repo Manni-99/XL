@@ -107,6 +107,10 @@ public class UpdaterXL {
         return !done;
     }
 
+    public ClearMenuItem getClearMenuItem(){
+        return clearMenu;
+    }
+
     // ----------
 
 }
