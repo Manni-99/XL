@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import xl.gui.menu.XLMenuBar;
 import xl.model.Sheet;
-
+//den inlämnade versionen
 public class XL extends JFrame {
 
     private static final int ROWS = 10, COLUMNS = 8;
