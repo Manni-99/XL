@@ -30,13 +30,13 @@ public class SlotLabel extends ColoredLabel implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        update();
+        
 
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-
+        update();
     }
 
     @Override
