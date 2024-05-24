@@ -16,43 +16,10 @@ import java.util.regex.Pattern;
 public class Sheet implements Environment {
     private Map<String, Cell> cells = new HashMap<>();
     private ExprParser parser;
-    private Environment env;
-    public String errorMeddelande = "";
+    private String errorMeddelande = "";
 
     public Sheet() {
         this.parser = new ExprParser();
-        /*
-         * this.env = new Environment() {
-         * 
-         * public double value(String value) {
-         * // Check if the value is a variable name or a literal value
-         * if (isVariable(value)) {
-         * // If it's a variable name, look up its value in the cells map
-         * String variableKey = value.substring(1);
-         * System.out.println(variableKey);
-         * System.out.println(cells.get(variableKey).value(this));
-         * if (cells.containsKey(variableKey)) {
-         * // If the variable exists in the cells map, return its value
-         * return cells.get(variableKey).value(this);
-         * } else {
-         * // If the variable doesn't exist, handle it accordingly (e.g., throw an
-         * // exception)
-         * // We will return null or 0.0
-         * return 0.0;
-         * }
-         * } else {
-         * // If it's a literal value, parse it and return it directly
-         * try {
-         * return Double.parseDouble(value);
-         * } catch (NumberFormatException e) {
-         * // Handle the case where the value cannot be parsed to a double
-         * throw new IllegalArgumentException("Invalid literal value: " + value); //
-         * Tomt
-         * }
-         * }
-         * }
-         * };
-         */
     }
 
     public boolean add(String ref, String value) {
@@ -104,10 +71,6 @@ public class Sheet implements Environment {
         }
     }
 
-    private boolean isVariable(String name) {
-        return name.startsWith("=");
-    }
-
     public String load(InputStream filePath) throws IOException {
         StringBuilder sb = new StringBuilder();
         try (BufferedReader br = new BufferedReader(new InputStreamReader(filePath))) {
@@ -136,11 +99,9 @@ public class Sheet implements Environment {
             if (c.getKey().equals(cell)) {
                 cells.remove(cell);
                 return true;
-                // System.out.println(cell + " Has been removed"); // Test prints
             }
         }
         return false;
-        // System.out.println("Nothing has been removed");// Test prints
     }
 
     public void clearAll() {
